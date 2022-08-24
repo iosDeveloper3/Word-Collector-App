@@ -6,16 +6,28 @@
 //
 
 import UIKit
+import ProgressHUD
 
 class LibraryViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var fileNames = ["Bidenticulate", "Barbette II", "Batrachivorous", "Batrachivorous", "Otic.txt"]
+    var fileNames = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.register(UINib(nibName: LibraryIconCollectionViewCell.identifier, bundle: nil), forCellWithReuseIdentifier: LibraryIconCollectionViewCell.identifier)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        StorageManager.allFileNames { [weak self] success, data in
+            if success {
+                self?.fileNames = data
+                self?.collectionView.reloadData()
+            }
+        }
     }
 
 }
