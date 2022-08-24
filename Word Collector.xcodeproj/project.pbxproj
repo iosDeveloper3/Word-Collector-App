@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		47C2EB3CF2A13C2235767F99 /* Pods_Word_Collector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B4E8B8837A71A837EB183B5 /* Pods_Word_Collector.framework */; };
+		6F012D8E28B676AC00D1FC5B /* CreateOrEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F012D8D28B676AC00D1FC5B /* CreateOrEditViewController.swift */; };
 		6FE1460728B52ABC005B112F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1460628B52ABC005B112F /* AppDelegate.swift */; };
 		6FE1460928B52ABC005B112F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FE1460828B52ABC005B112F /* SceneDelegate.swift */; };
 		6FE1460E28B52ABC005B112F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6FE1460C28B52ABC005B112F /* Main.storyboard */; };
@@ -20,6 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B4E8B8837A71A837EB183B5 /* Pods_Word_Collector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Word_Collector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0FF48AD95C42AAC117545CA2 /* Pods-Word Collector.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Word Collector.release.xcconfig"; path = "Target Support Files/Pods-Word Collector/Pods-Word Collector.release.xcconfig"; sourceTree = "<group>"; };
+		6F012D8D28B676AC00D1FC5B /* CreateOrEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrEditViewController.swift; sourceTree = "<group>"; };
 		6FE1460328B52ABC005B112F /* Word Collector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Word Collector.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FE1460628B52ABC005B112F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6FE1460828B52ABC005B112F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -32,6 +37,7 @@
 		6FE1462328B537BB005B112F /* LibraryIconCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LibraryIconCollectionViewCell.xib; sourceTree = "<group>"; };
 		6FE1462828B53BF3005B112F /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		6FE1462A28B53EFB005B112F /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		B51288757D29B4FA60DBE792 /* Pods-Word Collector.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Word Collector.debug.xcconfig"; path = "Target Support Files/Pods-Word Collector/Pods-Word Collector.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,17 +45,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47C2EB3CF2A13C2235767F99 /* Pods_Word_Collector.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		53E00878EC330AC5F0B5BE33 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B51288757D29B4FA60DBE792 /* Pods-Word Collector.debug.xcconfig */,
+				0FF48AD95C42AAC117545CA2 /* Pods-Word Collector.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		5981043A3CB48DB3BDDC6885 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0B4E8B8837A71A837EB183B5 /* Pods_Word_Collector.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		6FE145FA28B52ABC005B112F = {
 			isa = PBXGroup;
 			children = (
 				6FE1460528B52ABC005B112F /* Word Collector */,
 				6FE1460428B52ABC005B112F /* Products */,
+				53E00878EC330AC5F0B5BE33 /* Pods */,
+				5981043A3CB48DB3BDDC6885 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -83,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				6FE1461F28B52CD7005B112F /* LibraryViewController.swift */,
+				6F012D8D28B676AC00D1FC5B /* CreateOrEditViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -126,9 +153,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6FE1461728B52ABD005B112F /* Build configuration list for PBXNativeTarget "Word Collector" */;
 			buildPhases = (
+				E814079A2B1B3839DE5DC691 /* [CP] Check Pods Manifest.lock */,
 				6FE145FF28B52ABC005B112F /* Sources */,
 				6FE1460028B52ABC005B112F /* Frameworks */,
 				6FE1460128B52ABC005B112F /* Resources */,
+				EF6EC660E27162BF35B305AE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -186,6 +215,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		E814079A2B1B3839DE5DC691 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Word Collector-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF6EC660E27162BF35B305AE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Word Collector/Pods-Word Collector-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Word Collector/Pods-Word Collector-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Word Collector/Pods-Word Collector-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		6FE145FF28B52ABC005B112F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -194,6 +265,7 @@
 				6FE1462B28B53EFB005B112F /* UIView+Extension.swift in Sources */,
 				6FE1462928B53BF3005B112F /* File.swift in Sources */,
 				6FE1460728B52ABC005B112F /* AppDelegate.swift in Sources */,
+				6F012D8E28B676AC00D1FC5B /* CreateOrEditViewController.swift in Sources */,
 				6FE1462028B52CD7005B112F /* LibraryViewController.swift in Sources */,
 				6FE1460928B52ABC005B112F /* SceneDelegate.swift in Sources */,
 				6FE1462428B537BB005B112F /* LibraryIconCollectionViewCell.swift in Sources */,
@@ -338,6 +410,7 @@
 		};
 		6FE1461828B52ABD005B112F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B51288757D29B4FA60DBE792 /* Pods-Word Collector.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -366,6 +439,7 @@
 		};
 		6FE1461928B52ABD005B112F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0FF48AD95C42AAC117545CA2 /* Pods-Word Collector.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

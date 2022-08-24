@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -22,7 +23,7 @@
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="t3N-W9-768">
                                         <rect key="frame" x="0.0" y="0.0" width="394" height="754"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NtK-Vu-SaM">
                                             <size key="itemSize" width="128" height="128"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -45,6 +46,7 @@
                                         </connections>
                                     </collectionView>
                                 </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="t3N-W9-768" firstAttribute="width" secondItem="3o9-DY-P61" secondAttribute="width" id="61F-1P-tX7"/>
                                     <constraint firstAttribute="trailing" secondItem="t3N-W9-768" secondAttribute="trailing" id="8GT-dD-jJp"/>
@@ -58,7 +60,7 @@
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="appBackground"/>
                         <constraints>
                             <constraint firstItem="3o9-DY-P61" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="6ed-4p-C3I"/>
                             <constraint firstItem="3o9-DY-P61" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="FSA-nf-V6t"/>
@@ -67,7 +69,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Library" id="s5V-Jr-C9O">
-                        <barButtonItem key="rightBarButtonItem" image="note.text.badge.plus" catalog="system" id="uiw-ia-Y81"/>
+                        <barButtonItem key="rightBarButtonItem" image="note.text.badge.plus" catalog="system" id="uiw-ia-Y81">
+                            <connections>
+                                <segue destination="WBz-Ix-YWz" kind="show" id="z8j-kx-Vd8"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="t3N-W9-768" id="ihB-Mp-9sO"/>
@@ -77,6 +83,73 @@
             </objects>
             <point key="canvasLocation" x="1139.1304347826087" y="84.375"/>
         </scene>
+        <!--Create / Edit-->
+        <scene sceneID="1Z6-vn-wAs">
+            <objects>
+                <viewController id="WBz-Ix-YWz" customClass="CreateOrEditViewController" customModule="Word_Collector" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GOl-Cu-ixt">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SuZ-v7-9p6">
+                                <rect key="frame" x="10" y="98" width="394" height="754"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="File name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ab0-o9-sLE">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JVg-3v-qac">
+                                        <rect key="frame" x="0.0" y="34" width="394" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="File content:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="owe-3f-a39">
+                                        <rect key="frame" x="0.0" y="68" width="394" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ngS-fT-NnO">
+                                        <rect key="frame" x="0.0" y="102" width="394" height="652"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="JVg-3v-qac" firstAttribute="height" secondItem="owe-3f-a39" secondAttribute="height" id="YFP-da-bWk"/>
+                                    <constraint firstItem="Ab0-o9-sLE" firstAttribute="height" secondItem="JVg-3v-qac" secondAttribute="height" id="eG4-UC-Jy4"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="x85-VE-eIl"/>
+                        <color key="backgroundColor" name="appBackground"/>
+                        <constraints>
+                            <constraint firstItem="SuZ-v7-9p6" firstAttribute="leading" secondItem="x85-VE-eIl" secondAttribute="leading" constant="10" id="0Eo-fU-pET"/>
+                            <constraint firstItem="SuZ-v7-9p6" firstAttribute="top" secondItem="x85-VE-eIl" secondAttribute="top" constant="10" id="GIG-0H-EYq"/>
+                            <constraint firstItem="x85-VE-eIl" firstAttribute="bottom" secondItem="SuZ-v7-9p6" secondAttribute="bottom" constant="10" id="Wc8-Q8-XkC"/>
+                            <constraint firstItem="x85-VE-eIl" firstAttribute="trailing" secondItem="SuZ-v7-9p6" secondAttribute="trailing" constant="10" id="yk4-FU-OWK"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Create / Edit" id="0RQ-PN-CSx">
+                        <barButtonItem key="rightBarButtonItem" image="square.and.arrow.down" catalog="system" id="rdG-Fh-xdA">
+                            <connections>
+                                <action selector="saveButtonTapped:" destination="WBz-Ix-YWz" id="UUH-WK-zYN"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="fileContentTextView" destination="ngS-fT-NnO" id="sqc-cn-qgX"/>
+                        <outlet property="fileNameTextField" destination="JVg-3v-qac" id="uvH-q3-f7c"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2eL-Nw-KXc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1890" y="84"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="cgf-kV-XYc">
             <objects>
@@ -85,6 +158,13 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YC9-kc-EVV">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" systemColor="tintColor"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" systemColor="tintColor"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -98,8 +178,18 @@
     </scenes>
     <resources>
         <image name="note.text.badge.plus" catalog="system" width="128" height="108"/>
+        <image name="square.and.arrow.down" catalog="system" width="121" height="128"/>
+        <namedColor name="appBackground">
+            <color red="0.67799997329711914" green="0.84700000286102295" blue="0.90200001001358032" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="tintColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
