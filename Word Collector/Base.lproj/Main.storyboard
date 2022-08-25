@@ -77,11 +77,62 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="t3N-W9-768" id="ihB-Mp-9sO"/>
+                        <segue destination="KSX-v4-uj3" kind="show" identifier="openFile" id="STM-C5-Bdg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1139.1304347826087" y="84.375"/>
+        </scene>
+        <!--File View Controller-->
+        <scene sceneID="HQ0-L0-2uN">
+            <objects>
+                <viewController id="KSX-v4-uj3" customClass="FileViewController" customModule="Word_Collector" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0Rb-ba-A4L">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kZt-Dp-hxx">
+                                <rect key="frame" x="10" y="98" width="394" height="754"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="amI-yp-jIN">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="754"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                        <color key="textColor" systemColor="labelColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="amI-yp-jIN" firstAttribute="width" secondItem="kZt-Dp-hxx" secondAttribute="width" id="AF2-SC-oyM"/>
+                                    <constraint firstItem="amI-yp-jIN" firstAttribute="height" secondItem="kZt-Dp-hxx" secondAttribute="height" id="KJz-KW-rU4"/>
+                                    <constraint firstItem="amI-yp-jIN" firstAttribute="leading" secondItem="kZt-Dp-hxx" secondAttribute="leading" id="L5S-rU-xA3"/>
+                                    <constraint firstItem="amI-yp-jIN" firstAttribute="top" secondItem="kZt-Dp-hxx" secondAttribute="top" id="VMZ-Nm-KTI"/>
+                                    <constraint firstAttribute="trailing" secondItem="amI-yp-jIN" secondAttribute="trailing" id="ohq-KK-dqp"/>
+                                    <constraint firstAttribute="bottom" secondItem="amI-yp-jIN" secondAttribute="bottom" id="vd9-L2-lps"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="Dwp-dP-hf1"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="LJG-IB-UEn"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vwc-RE-ygp"/>
+                        <color key="backgroundColor" name="appBackground"/>
+                        <constraints>
+                            <constraint firstItem="kZt-Dp-hxx" firstAttribute="top" secondItem="vwc-RE-ygp" secondAttribute="top" constant="10" id="RQq-u4-oET"/>
+                            <constraint firstItem="vwc-RE-ygp" firstAttribute="trailing" secondItem="kZt-Dp-hxx" secondAttribute="trailing" constant="10" id="UlQ-ak-9OR"/>
+                            <constraint firstItem="kZt-Dp-hxx" firstAttribute="leading" secondItem="vwc-RE-ygp" secondAttribute="leading" constant="10" id="iPK-LE-jWo"/>
+                            <constraint firstItem="vwc-RE-ygp" firstAttribute="bottom" secondItem="kZt-Dp-hxx" secondAttribute="bottom" constant="10" id="w2L-Pj-ziN"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="EIv-PQ-wCq"/>
+                    <connections>
+                        <outlet property="contentTextView" destination="amI-yp-jIN" id="Rwa-hs-xdb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GmD-vz-zBW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1139" y="796"/>
         </scene>
         <!--Create / Edit-->
         <scene sceneID="1Z6-vn-wAs">
@@ -150,10 +201,10 @@
             </objects>
             <point key="canvasLocation" x="1890" y="84"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Custom Navigation View Controller-->
         <scene sceneID="cgf-kV-XYc">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HqX-wz-Pr7" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="HqX-wz-Pr7" customClass="CustomNavigationViewController" customModule="Word_Collector" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YC9-kc-EVV">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

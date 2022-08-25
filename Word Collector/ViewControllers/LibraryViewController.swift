@@ -12,7 +12,9 @@ class LibraryViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var fileNames = [String]()
+    private let openFile = "openFile"
+    
+    private var fileNames = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,11 +24,20 @@ class LibraryViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        StorageManager.allFileNames { [weak self] success, data in
-            if success {
+        StorageManager.allFileNames { [weak self] result in
+            switch result {
+            case .success(let data):
                 self?.fileNames = data
                 self?.collectionView.reloadData()
+            case .failure(let error):
+                ProgressHUD.showError(error.localizedDescription)
             }
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let indexPath = sender as? IndexPath, let vc = segue.destination as? FileViewController {
+            vc.fileName = fileNames[indexPath.row]
         }
     }
 
@@ -44,5 +55,9 @@ extension LibraryViewController: UICollectionViewDelegate, UICollectionViewDataS
         }
         cell.setup(fileName: fileNames[indexPath.row])
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: openFile, sender: indexPath)
     }
 }

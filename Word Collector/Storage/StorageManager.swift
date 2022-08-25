@@ -6,32 +6,28 @@
 //
 
 import Foundation
-import ProgressHUD
 
 class StorageManager {
     
     private static let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
     
-    static func allFileNames(completion: (Bool, [String]) -> Void) {
+    static func allFileNames(completion: (Result<[String], Error>) -> Void) {
         
         if let dir = documentDirectory {
             do {
-                completion(true, try FileManager.default.contentsOfDirectory(atPath: dir.path))
+                completion(.success(try FileManager.default.contentsOfDirectory(atPath: dir.path)))
             } catch {
-                ProgressHUD.showError(error.localizedDescription)
-                completion(false, [])
+                completion(.failure(error))
             }
         } else {
-            ProgressHUD.showError(StorageInteractionError.unknownIOError.localizedDescription)
-            completion(false, [])
+            completion(.failure(StorageInteractionError.unknownIOError))
         }
     }
     
-    static func saveFile(fileName: String?, fileContent: String?) {
+    static func saveFile(fileName: String?, fileContent: String?) throws {
         
         guard let fileName = fileName, !fileName.isEmpty else {
-            ProgressHUD.showError(StorageInteractionError.emptyFileName.localizedDescription)
-            return
+            throw StorageInteractionError.emptyFileName
         }
         
         if let dir = documentDirectory {
@@ -39,17 +35,25 @@ class StorageManager {
             let fileContent = fileContent ?? ""
             let fileURL = dir.appendingPathComponent(fileName, isDirectory: false)
             
-            do {
-                try fileContent.write(to: fileURL, atomically: true, encoding: .utf8)
-            } catch {
-                ProgressHUD.showError(error.localizedDescription)
-                return
-            }
+            try fileContent.write(to: fileURL, atomically: true, encoding: .utf8)
         } else {
-            ProgressHUD.showError(StorageInteractionError.unknownIOError.localizedDescription)
-            return
+            throw StorageInteractionError.unknownIOError
+        }
+    }
+    
+    static func readFile(fileName: String?) throws -> String {
+        
+        guard let fileName = fileName, !fileName.isEmpty else {
+            throw StorageInteractionError.emptyFileName
         }
         
-        ProgressHUD.showSuccess("File saved")
+        if let dir = documentDirectory {
+            
+            let fileUrl = dir.appendingPathComponent(fileName, isDirectory: false)
+            
+            return try String(contentsOf: fileUrl, encoding: .utf8)
+        } else {
+            throw StorageInteractionError.unknownIOError
+        }
     }
 }
