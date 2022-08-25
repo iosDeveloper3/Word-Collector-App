@@ -10,6 +10,7 @@ import UIKit
 class FileViewController: UIViewController {
     
     @IBOutlet weak var contentTextView: UITextView!
+    @IBOutlet weak var textFormatView: UIView!
     
     var fileName: String?
     
@@ -24,5 +25,20 @@ class FileViewController: UIViewController {
             contentTextView.text = error.localizedDescription
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? CreateOrEditViewController {
+            vc.fileName = title
+            vc.fileContent = contentTextView.text
+        }
+    }
 
+    @IBAction func textFormatClicked(_ sender: Any) {
+        textFormatView.isHidden = false
+    }
+    
+    @IBAction func closeTextFormatClicked(_ sender: Any) {
+        textFormatView.isHidden = true
+    }
+    
 }

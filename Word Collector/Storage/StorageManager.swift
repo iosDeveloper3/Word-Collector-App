@@ -56,4 +56,20 @@ class StorageManager {
             throw StorageInteractionError.unknownIOError
         }
     }
+    
+    static func deleteFile(fileName: String?) throws {
+        
+        guard let fileName = fileName, !fileName.isEmpty else {
+            throw StorageInteractionError.emptyFileName
+        }
+        
+        if let dir = documentDirectory {
+            
+            let fileUrl = dir.appendingPathComponent(fileName, isDirectory: false)
+            
+            try FileManager.default.removeItem(atPath: fileUrl.path)
+        } else {
+            throw StorageInteractionError.unknownIOError
+        }
+    }
 }
