@@ -25,6 +25,7 @@ class FileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setBorderColorForMarkedButtons()
         setTextFormat()
     }
     
@@ -44,6 +45,15 @@ class FileViewController: UIViewController {
         if let vc = segue.destination as? CreateOrEditViewController {
             vc.fileName = title
             vc.fileContent = contentTextView.text
+        }
+    }
+    
+    // based on https://developer.apple.com/videos/play/wwdc2019/214/
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
+            setBorderColorForMarkedButtons()
         }
     }
     
@@ -72,6 +82,13 @@ class FileViewController: UIViewController {
         whiteOnBlackSchemeButton.layer.borderWidth = 0
         readingSchemeButton.layer.borderWidth = 0
         button.layer.borderWidth = 2
+    }
+    
+    func setBorderColorForMarkedButtons() {
+        defaultSchemeButton.layer.borderColor = UIColor.label.cgColor
+        blackOnWhiteSchemeButton.layer.borderColor = UIColor.label.cgColor
+        whiteOnBlackSchemeButton.layer.borderColor = UIColor.label.cgColor
+        readingSchemeButton.layer.borderColor = UIColor.label.cgColor
     }
 
     @IBAction func textFormatClicked(_ sender: Any) {

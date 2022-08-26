@@ -77,6 +77,10 @@ extension CreateOrEditViewController: CustomNavigationViewControllerDelegate {
     
     func shouldPop() -> Bool {
         
+        if fileName ?? "" == fileNameTextField.text ?? "" && fileContent ?? "" == fileContentTextView.text ?? "" {
+            return true
+        }
+        
         let alert = UIAlertController(title: "Unsaved changes", message: "What would you like to do with them? You can't undo this action.", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak self] _ in
