@@ -18,6 +18,7 @@ class FileViewController: UIViewController {
     @IBOutlet weak var whiteOnBlackSchemeButton: UIButton!
     @IBOutlet weak var readingSchemeButton: UIButton!
     @IBOutlet weak var dictionaryTermLabel: UILabel!
+    @IBOutlet weak var termPronunciationButton: UIButton!
     
     let defaultFontSize: Float = 14
     let defaultFontWeight: Float = 3
@@ -30,6 +31,16 @@ class FileViewController: UIViewController {
         setTextFormat()
         contentTextView.handleWordAndPosition = { [weak self] (word, range) in
             self?.dictionaryTermLabel.text = word
+            NetworkService.shared.fetchEntries(for: word ?? "") { [weak self] (result) in
+                switch result {
+                case .success(let entries):
+                    print(entries)
+                    self?.termPronunciationButton.setTitle(entries.first?.phonetic, for: .normal)
+                case .failure(let error):
+                    self?.dictionaryTermLabel.text = "No definition found"
+                    print(error)
+                }
+            }
         }
     }
     

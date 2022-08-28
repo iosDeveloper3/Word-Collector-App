@@ -9,6 +9,16 @@
 /* Begin PBXBuildFile section */
 		47C2EB3CF2A13C2235767F99 /* Pods_Word_Collector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B4E8B8837A71A837EB183B5 /* Pods_Word_Collector.framework */; };
 		6F012D8E28B676AC00D1FC5B /* CreateOrEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F012D8D28B676AC00D1FC5B /* CreateOrEditViewController.swift */; };
+		6F48596828BBA6DC00B1FA71 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F48596728BBA6DC00B1FA71 /* Method.swift */; };
+		6F48596C28BBA77900B1FA71 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F48596B28BBA77900B1FA71 /* NetworkService.swift */; };
+		6F48596E28BBA98D00B1FA71 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F48596D28BBA98D00B1FA71 /* Route.swift */; };
+		6F48597028BBAA4D00B1FA71 /* DictionaryRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F48596F28BBAA4D00B1FA71 /* DictionaryRoute.swift */; };
+		6F48597228BBAD0000B1FA71 /* APIInteractionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F48597128BBAD0000B1FA71 /* APIInteractionError.swift */; };
+		6F48597428BBB7AB00B1FA71 /* Definition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F48597328BBB7AB00B1FA71 /* Definition.swift */; };
+		6F48597628BBB83C00B1FA71 /* Meaning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F48597528BBB83C00B1FA71 /* Meaning.swift */; };
+		6F48597828BBB89D00B1FA71 /* License.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F48597728BBB89D00B1FA71 /* License.swift */; };
+		6F48597A28BBB8D500B1FA71 /* Phonetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F48597928BBB8D500B1FA71 /* Phonetic.swift */; };
+		6F48597C28BBB95300B1FA71 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F48597B28BBB95300B1FA71 /* Entry.swift */; };
 		6F6FA85028BB666B006D01E3 /* TappedWordsRecognizingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6FA84F28BB666B006D01E3 /* TappedWordsRecognizingTextView.swift */; };
 		6F7DB36728B78ABB0043FDC2 /* FileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7DB36628B78ABB0043FDC2 /* FileViewController.swift */; };
 		6F7DB36928B79E350043FDC2 /* CustomNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F7DB36828B79E350043FDC2 /* CustomNavigationViewController.swift */; };
@@ -34,6 +44,16 @@
 		0B4E8B8837A71A837EB183B5 /* Pods_Word_Collector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Word_Collector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FF48AD95C42AAC117545CA2 /* Pods-Word Collector.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Word Collector.release.xcconfig"; path = "Target Support Files/Pods-Word Collector/Pods-Word Collector.release.xcconfig"; sourceTree = "<group>"; };
 		6F012D8D28B676AC00D1FC5B /* CreateOrEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrEditViewController.swift; sourceTree = "<group>"; };
+		6F48596728BBA6DC00B1FA71 /* Method.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
+		6F48596B28BBA77900B1FA71 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		6F48596D28BBA98D00B1FA71 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		6F48596F28BBAA4D00B1FA71 /* DictionaryRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryRoute.swift; sourceTree = "<group>"; };
+		6F48597128BBAD0000B1FA71 /* APIInteractionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIInteractionError.swift; sourceTree = "<group>"; };
+		6F48597328BBB7AB00B1FA71 /* Definition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Definition.swift; sourceTree = "<group>"; };
+		6F48597528BBB83C00B1FA71 /* Meaning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meaning.swift; sourceTree = "<group>"; };
+		6F48597728BBB89D00B1FA71 /* License.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = License.swift; sourceTree = "<group>"; };
+		6F48597928BBB8D500B1FA71 /* Phonetic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phonetic.swift; sourceTree = "<group>"; };
+		6F48597B28BBB95300B1FA71 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
 		6F6FA84F28BB666B006D01E3 /* TappedWordsRecognizingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TappedWordsRecognizingTextView.swift; sourceTree = "<group>"; };
 		6F7DB36628B78ABB0043FDC2 /* FileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileViewController.swift; sourceTree = "<group>"; };
 		6F7DB36828B79E350043FDC2 /* CustomNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationViewController.swift; sourceTree = "<group>"; };
@@ -87,13 +107,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6F48596428BBA24C00B1FA71 /* DictionaryTerm */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DictionaryTerm;
-			sourceTree = "<group>";
-		};
 		6F6FA84E28BB663F006D01E3 /* RecognizingTextView */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				6FE0A80528B69A9500F90099 /* StorageInteractionError.swift */,
+				6F48597128BBAD0000B1FA71 /* APIInteractionError.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -180,6 +194,11 @@
 			isa = PBXGroup;
 			children = (
 				6FDE2CF228B90ECD007956FF /* ColorScheme.swift */,
+				6F48597328BBB7AB00B1FA71 /* Definition.swift */,
+				6F48597528BBB83C00B1FA71 /* Meaning.swift */,
+				6F48597728BBB89D00B1FA71 /* License.swift */,
+				6F48597928BBB8D500B1FA71 /* Phonetic.swift */,
+				6F48597B28BBB95300B1FA71 /* Entry.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -199,6 +218,10 @@
 		6FE1461E28B52C96005B112F /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				6F48596728BBA6DC00B1FA71 /* Method.swift */,
+				6F48596B28BBA77900B1FA71 /* NetworkService.swift */,
+				6F48596D28BBA98D00B1FA71 /* Route.swift */,
+				6F48596F28BBAA4D00B1FA71 /* DictionaryRoute.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -206,7 +229,6 @@
 		6FE1462128B53767005B112F /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
-				6F48596428BBA24C00B1FA71 /* DictionaryTerm */,
 				6F6FA84E28BB663F006D01E3 /* RecognizingTextView */,
 				6F9B198228B7F0B800BDAB24 /* LibraryIcon */,
 			);
@@ -330,14 +352,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F7DB36728B78ABB0043FDC2 /* FileViewController.swift in Sources */,
+				6F48597A28BBB8D500B1FA71 /* Phonetic.swift in Sources */,
 				6FDE2CF328B90ECD007956FF /* ColorScheme.swift in Sources */,
+				6F48597828BBB89D00B1FA71 /* License.swift in Sources */,
 				6F7DB36928B79E350043FDC2 /* CustomNavigationViewController.swift in Sources */,
+				6F48597028BBAA4D00B1FA71 /* DictionaryRoute.swift in Sources */,
 				6FE1462B28B53EFB005B112F /* UIView+Extension.swift in Sources */,
 				6FE1460728B52ABC005B112F /* AppDelegate.swift in Sources */,
 				6F012D8E28B676AC00D1FC5B /* CreateOrEditViewController.swift in Sources */,
 				6FE1462028B52CD7005B112F /* LibraryViewController.swift in Sources */,
+				6F48597228BBAD0000B1FA71 /* APIInteractionError.swift in Sources */,
 				6FDE2CF128B9082B007956FF /* UserDefaults+Extension.swift in Sources */,
+				6F48596828BBA6DC00B1FA71 /* Method.swift in Sources */,
+				6F48597428BBB7AB00B1FA71 /* Definition.swift in Sources */,
 				6FE1460928B52ABC005B112F /* SceneDelegate.swift in Sources */,
+				6F48597C28BBB95300B1FA71 /* Entry.swift in Sources */,
+				6F48596C28BBA77900B1FA71 /* NetworkService.swift in Sources */,
+				6F48596E28BBA98D00B1FA71 /* Route.swift in Sources */,
 				6FE1462428B537BB005B112F /* LibraryIconCollectionViewCell.swift in Sources */,
 				6F9B198128B7DDCB00BDAB24 /* UIFont_Weight+Extension.swift in Sources */,
 				6F6FA85028BB666B006D01E3 /* TappedWordsRecognizingTextView.swift in Sources */,
@@ -345,6 +376,7 @@
 				6FDE2CEF28B8F861007956FF /* UIColor+Extension.swift in Sources */,
 				6FE0A80628B69A9500F90099 /* StorageInteractionError.swift in Sources */,
 				6F9B197F28B7DA0A00BDAB24 /* UIFont+Extension.swift in Sources */,
+				6F48597628BBB83C00B1FA71 /* Meaning.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

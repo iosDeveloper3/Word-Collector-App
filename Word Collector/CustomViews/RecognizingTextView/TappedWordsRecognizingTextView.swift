@@ -27,8 +27,6 @@ class TappedWordsRecognizingTextView: UITextView {
             return
         }
         
-        let word = text(in: wordRange)
-        print("oto słowo Boże: \(word)")
-        handleWordAndPosition?(word, wordRange)
+        handleWordAndPosition?(text(in: wordRange), wordRange)
     }
 }
