@@ -96,7 +96,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kZt-Dp-hxx">
                                 <rect key="frame" x="10" y="98" width="394" height="754"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="amI-yp-jIN">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="amI-yp-jIN" customClass="TappedWordsRecognizingTextView" customModule="Word_Collector" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="394" height="754"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
@@ -259,15 +259,35 @@
                                     <constraint firstItem="ptB-Y7-og2" firstAttribute="top" secondItem="BhL-mX-jOD" secondAttribute="top" constant="10" id="yQw-zB-EKl"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="npH-O3-Wo6">
+                                <rect key="frame" x="0.0" y="638" width="414" height="224"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m9o-0C-ERx">
+                                        <rect key="frame" x="166" y="102" width="42" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstItem="m9o-0C-ERx" firstAttribute="centerX" secondItem="npH-O3-Wo6" secondAttribute="centerX" id="U0E-tu-5pE"/>
+                                    <constraint firstItem="m9o-0C-ERx" firstAttribute="centerY" secondItem="npH-O3-Wo6" secondAttribute="centerY" id="Vye-Ha-APY"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vwc-RE-ygp"/>
                         <color key="backgroundColor" name="appBackground"/>
                         <constraints>
                             <constraint firstItem="vwc-RE-ygp" firstAttribute="bottom" secondItem="BhL-mX-jOD" secondAttribute="bottom" id="0vB-Q3-cGA"/>
+                            <constraint firstItem="vwc-RE-ygp" firstAttribute="bottom" secondItem="npH-O3-Wo6" secondAttribute="bottom" id="L7D-Hh-a09"/>
+                            <constraint firstItem="npH-O3-Wo6" firstAttribute="leading" secondItem="vwc-RE-ygp" secondAttribute="leading" id="L9G-4Y-jMf"/>
                             <constraint firstItem="kZt-Dp-hxx" firstAttribute="top" secondItem="vwc-RE-ygp" secondAttribute="top" constant="10" id="RQq-u4-oET"/>
                             <constraint firstItem="BhL-mX-jOD" firstAttribute="leading" secondItem="vwc-RE-ygp" secondAttribute="leading" id="RZ7-Ev-zRJ"/>
                             <constraint firstItem="vwc-RE-ygp" firstAttribute="trailing" secondItem="kZt-Dp-hxx" secondAttribute="trailing" constant="10" id="UlQ-ak-9OR"/>
+                            <constraint firstItem="npH-O3-Wo6" firstAttribute="height" secondItem="0Rb-ba-A4L" secondAttribute="height" multiplier="0.25" id="dwX-kM-4Ox"/>
                             <constraint firstItem="kZt-Dp-hxx" firstAttribute="leading" secondItem="vwc-RE-ygp" secondAttribute="leading" constant="10" id="iPK-LE-jWo"/>
+                            <constraint firstItem="vwc-RE-ygp" firstAttribute="trailing" secondItem="npH-O3-Wo6" secondAttribute="trailing" id="jCa-65-h59"/>
                             <constraint firstItem="BhL-mX-jOD" firstAttribute="height" secondItem="0Rb-ba-A4L" secondAttribute="height" multiplier="0.5" id="rK5-43-Mn6"/>
                             <constraint firstItem="vwc-RE-ygp" firstAttribute="trailing" secondItem="BhL-mX-jOD" secondAttribute="trailing" id="uMg-gC-PoW"/>
                             <constraint firstItem="vwc-RE-ygp" firstAttribute="bottom" secondItem="kZt-Dp-hxx" secondAttribute="bottom" constant="10" id="w2L-Pj-ziN"/>
@@ -291,6 +311,7 @@
                         <outlet property="blackOnWhiteSchemeButton" destination="8is-kC-wC6" id="oCK-jN-d6n"/>
                         <outlet property="contentTextView" destination="amI-yp-jIN" id="Rwa-hs-xdb"/>
                         <outlet property="defaultSchemeButton" destination="Soi-Te-rMm" id="OGb-eU-Mls"/>
+                        <outlet property="dictionaryTermLabel" destination="m9o-0C-ERx" id="yLl-5M-D77"/>
                         <outlet property="fontSizeSlider" destination="edZ-l3-iMk" id="UJN-nM-1yR"/>
                         <outlet property="fontWeightSlider" destination="T4n-NG-2IQ" id="T1A-Dl-8S5"/>
                         <outlet property="readingSchemeButton" destination="AdS-sT-cfs" id="ay4-Dz-7uY"/>

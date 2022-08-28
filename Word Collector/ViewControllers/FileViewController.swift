@@ -9,7 +9,7 @@ import UIKit
 
 class FileViewController: UIViewController {
     
-    @IBOutlet weak var contentTextView: UITextView!
+    @IBOutlet weak var contentTextView: TappedWordsRecognizingTextView!
     @IBOutlet weak var textFormatView: UIView!
     @IBOutlet weak var fontSizeSlider: UISlider!
     @IBOutlet weak var fontWeightSlider: UISlider!
@@ -17,6 +17,7 @@ class FileViewController: UIViewController {
     @IBOutlet weak var blackOnWhiteSchemeButton: UIButton!
     @IBOutlet weak var whiteOnBlackSchemeButton: UIButton!
     @IBOutlet weak var readingSchemeButton: UIButton!
+    @IBOutlet weak var dictionaryTermLabel: UILabel!
     
     let defaultFontSize: Float = 14
     let defaultFontWeight: Float = 3
@@ -27,6 +28,9 @@ class FileViewController: UIViewController {
         super.viewDidLoad()
         setBorderColorForMarkedButtons()
         setTextFormat()
+        contentTextView.handleWordAndPosition = { [weak self] (word, range) in
+            self?.dictionaryTermLabel.text = word
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

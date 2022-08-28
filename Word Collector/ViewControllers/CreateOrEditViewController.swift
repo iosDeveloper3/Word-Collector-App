@@ -52,6 +52,8 @@ class CreateOrEditViewController: UIViewController {
 
     @IBAction func saveButtonTapped(_ sender: Any) {
         saveChanges(ignoreUnnamedFile: false)
+        fileName = fileNameTextField.text
+        fileContent = fileContentTextView.text
     }
     
     @IBAction func deleteButtonTapped(_ sender: Any) {
