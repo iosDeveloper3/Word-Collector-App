@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import AVFoundation
+//import SwiftAudioPlayer
 
 class FileViewController: UIViewController {
     
@@ -24,6 +26,7 @@ class FileViewController: UIViewController {
     let defaultFontWeight: Float = 3
     
     var fileName: String?
+    var term: DictionaryTerm?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,11 +34,10 @@ class FileViewController: UIViewController {
         setTextFormat()
         contentTextView.handleWordAndPosition = { [weak self] (word, range) in
             self?.dictionaryTermLabel.text = word
-            NetworkService.shared.fetchEntries(for: word ?? "") { [weak self] (result) in
+            NetworkManager.shared.fetchEntries(for: word ?? "") { [weak self] (result) in
                 switch result {
                 case .success(let entries):
-                    print(entries)
-                    self?.termPronunciationButton.setTitle(entries.first?.phonetic, for: .normal)
+                    self?.setNewDictionaryTerm(newTerm: DictionaryTerm(entries))
                 case .failure(let error):
                     self?.dictionaryTermLabel.text = "No definition found"
                     print(error)
@@ -105,6 +107,11 @@ class FileViewController: UIViewController {
         whiteOnBlackSchemeButton.layer.borderColor = UIColor.label.cgColor
         readingSchemeButton.layer.borderColor = UIColor.label.cgColor
     }
+    
+    func setNewDictionaryTerm(newTerm: DictionaryTerm) {
+        term = newTerm
+        termPronunciationButton.setTitle(term?.phonetic, for: .normal)
+    }
 
     @IBAction func textFormatClicked(_ sender: Any) {
         textFormatView.isHidden = false
@@ -147,5 +154,9 @@ class FileViewController: UIViewController {
         UserDefaults.standard.fontWeight = defaultFontWeight
         UserDefaults.standard.colorScheme = ColorScheme.defaultScheme.rawValue
         setTextFormat()
+    }
+    
+    @IBAction func pronunciationButtonTapped(_ sender: Any) {
+        term?.playPronunciation()
     }
 }

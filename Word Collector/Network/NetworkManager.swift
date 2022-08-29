@@ -8,9 +8,9 @@
 import Foundation
 
 // based on https://www.youtube.com/playlist?list=PLgBVHL8joMCthoqCwsWAUWIiyJaPrqPA4
-struct NetworkService {
+class NetworkManager {
     
-    static let shared = NetworkService()
+    static let shared = NetworkManager()
     
     private init() {}
     

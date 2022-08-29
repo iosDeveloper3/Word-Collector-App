@@ -277,7 +277,10 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QcS-UG-kmN">
                                                         <rect key="frame" x="0.0" y="20.5" width="394" height="55.5"/>
                                                         <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" image="speaker.wave.3.fill" catalog="system" title="/ˈemfəsɪs/"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="speaker.wave.3.fill" catalog="system" title="/ˈemfəsɪs/" imagePadding="10"/>
+                                                        <connections>
+                                                            <action selector="pronunciationButtonTapped:" destination="KSX-v4-uj3" eventType="touchUpInside" id="XNI-vD-QYV"/>
+                                                        </connections>
                                                     </button>
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="9as-as-hlW">
                                                         <rect key="frame" x="0.0" y="76" width="394" height="128"/>
