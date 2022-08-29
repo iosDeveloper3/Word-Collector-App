@@ -12,4 +12,11 @@ struct Definition: Decodable {
     let synonyms: [String]?
     let antonyms: [String]?
     let example: String?
+    
+    init() {
+        definition = nil
+        synonyms = nil
+        antonyms = nil
+        example = nil
+    }
 }

@@ -10,14 +10,20 @@ import UIKit
 class TappedWordsRecognizingTextView: UITextView {
     
     var handleWordAndPosition: ((String?, UITextRange?) -> Void)?
+    var undoWordAndPosition: (() -> Void)?
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         
-        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(_:))))
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(_:))))
+        addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:))))
+    }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer) {
+        undoWordAndPosition?()
     }
 
-    @objc func handleTap(_ sender: UITapGestureRecognizer) {
+    @objc func handleLongPress(_ sender: UILongPressGestureRecognizer) {
         
         let position = sender.location(in: self)
         

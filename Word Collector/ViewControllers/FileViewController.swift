@@ -19,8 +19,11 @@ class FileViewController: UIViewController {
     @IBOutlet weak var blackOnWhiteSchemeButton: UIButton!
     @IBOutlet weak var whiteOnBlackSchemeButton: UIButton!
     @IBOutlet weak var readingSchemeButton: UIButton!
+    @IBOutlet weak var termViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var termView: UIView!
     @IBOutlet weak var dictionaryTermLabel: UILabel!
     @IBOutlet weak var termPronunciationButton: UIButton!
+    @IBOutlet weak var definitionsTableView: UITableView!
     
     let defaultFontSize: Float = 14
     let defaultFontWeight: Float = 3
@@ -33,17 +36,24 @@ class FileViewController: UIViewController {
         setBorderColorForMarkedButtons()
         setTextFormat()
         contentTextView.handleWordAndPosition = { [weak self] (word, range) in
+            guard self?.term?.word != word else { return }
             self?.dictionaryTermLabel.text = word
             NetworkManager.shared.fetchEntries(for: word ?? "") { [weak self] (result) in
                 switch result {
                 case .success(let entries):
-                    self?.setNewDictionaryTerm(newTerm: DictionaryTerm(entries))
+                    self?.setNewDictionaryTerm(newTerm: DictionaryTerm(entries, for: word))
                 case .failure(let error):
                     self?.dictionaryTermLabel.text = "No definition found"
                     print(error)
                 }
             }
         }
+        contentTextView.undoWordAndPosition = { [weak self] () in
+            self?.termView.isHidden = true
+            self?.termViewHeight = self?.termViewHeight.setMultiplier(multiplier: 0.01)
+        }
+        definitionsTableView.register(UINib(nibName: DefinitionTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: DefinitionTableViewCell.identifier)
+        termViewHeight = termViewHeight.setMultiplier(multiplier: 0.01)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -111,9 +121,14 @@ class FileViewController: UIViewController {
     func setNewDictionaryTerm(newTerm: DictionaryTerm) {
         term = newTerm
         termPronunciationButton.setTitle(term?.phonetic, for: .normal)
+        definitionsTableView.reloadData()
+        termViewHeight = termViewHeight.setMultiplier(multiplier: 0.6)
+        termView.isHidden = false
     }
 
     @IBAction func textFormatClicked(_ sender: Any) {
+        termView.isHidden = true
+        termViewHeight = termViewHeight.setMultiplier(multiplier: 0.01)
         textFormatView.isHidden = false
     }
     
@@ -158,5 +173,28 @@ class FileViewController: UIViewController {
     
     @IBAction func pronunciationButtonTapped(_ sender: Any) {
         term?.playPronunciation()
+    }
+}
+
+extension FileViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return term?.partsOfSpeach.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return term?.partsOfSpeach[section]
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return term?.information[section].count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: DefinitionTableViewCell.identifier) as? DefinitionTableViewCell else {
+            fatalError()
+        }
+        cell.setup(definition: term?.information[indexPath.section][indexPath.row] ?? Definition())
+        return cell
     }
 }

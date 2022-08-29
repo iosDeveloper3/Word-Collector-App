@@ -94,10 +94,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kZt-Dp-hxx">
-                                <rect key="frame" x="10" y="98" width="394" height="754"/>
+                                <rect key="frame" x="10" y="98" width="394" height="682.5"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="amI-yp-jIN" customClass="TappedWordsRecognizingTextView" customModule="Word_Collector" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="394" height="754"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="amI-yp-jIN" customClass="TappedWordsRecognizingTextView" customModule="Word_Collector" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="682.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <color key="textColor" systemColor="labelColor"/>
@@ -259,54 +259,43 @@
                                     <constraint firstItem="ptB-Y7-og2" firstAttribute="top" secondItem="BhL-mX-jOD" secondAttribute="top" constant="10" id="yQw-zB-EKl"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="npH-O3-Wo6">
-                                <rect key="frame" x="0.0" y="638" width="414" height="224"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="npH-O3-Wo6">
+                                <rect key="frame" x="0.0" y="790.5" width="414" height="71.5"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="blu-Qp-AQc">
-                                        <rect key="frame" x="10" y="10" width="394" height="204"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="idD-Bs-35w">
+                                        <rect key="frame" x="10" y="10" width="394" height="51.5"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="idD-Bs-35w">
-                                                <rect key="frame" x="0.0" y="0.0" width="394" height="204"/>
-                                                <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="emphasis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X6c-Gb-9ah">
-                                                        <rect key="frame" x="0.0" y="0.0" width="394" height="20.5"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QcS-UG-kmN">
-                                                        <rect key="frame" x="0.0" y="20.5" width="394" height="55.5"/>
-                                                        <state key="normal" title="Button"/>
-                                                        <buttonConfiguration key="configuration" style="plain" image="speaker.wave.3.fill" catalog="system" title="/ˈemfəsɪs/" imagePadding="10"/>
-                                                        <connections>
-                                                            <action selector="pronunciationButtonTapped:" destination="KSX-v4-uj3" eventType="touchUpInside" id="XNI-vD-QYV"/>
-                                                        </connections>
-                                                    </button>
-                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="9as-as-hlW">
-                                                        <rect key="frame" x="0.0" y="76" width="394" height="128"/>
-                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                    </tableView>
-                                                </subviews>
-                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="emphasis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X6c-Gb-9ah">
+                                                <rect key="frame" x="0.0" y="0.0" width="394" height="20.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QcS-UG-kmN">
+                                                <rect key="frame" x="0.0" y="20.5" width="394" height="31"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" image="speaker.wave.3.fill" catalog="system" title="/ˈemfəsɪs/" imagePadding="10"/>
+                                                <connections>
+                                                    <action selector="pronunciationButtonTapped:" destination="KSX-v4-uj3" eventType="touchUpInside" id="XNI-vD-QYV"/>
+                                                </connections>
+                                            </button>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="9as-as-hlW">
+                                                <rect key="frame" x="0.0" y="51.5" width="394" height="0.0"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="KSX-v4-uj3" id="Xvf-r2-Wlz"/>
+                                                    <outlet property="delegate" destination="KSX-v4-uj3" id="xoU-YU-oiJ"/>
+                                                </connections>
+                                            </tableView>
                                         </subviews>
-                                        <constraints>
-                                            <constraint firstItem="idD-Bs-35w" firstAttribute="height" secondItem="blu-Qp-AQc" secondAttribute="height" id="CMn-L8-gQK"/>
-                                            <constraint firstAttribute="trailing" secondItem="idD-Bs-35w" secondAttribute="trailing" id="XNh-xH-gRp"/>
-                                            <constraint firstItem="idD-Bs-35w" firstAttribute="top" secondItem="blu-Qp-AQc" secondAttribute="top" id="Xp4-Nb-KaZ"/>
-                                            <constraint firstItem="idD-Bs-35w" firstAttribute="width" secondItem="blu-Qp-AQc" secondAttribute="width" id="kSo-Qo-vQR"/>
-                                            <constraint firstItem="idD-Bs-35w" firstAttribute="leading" secondItem="blu-Qp-AQc" secondAttribute="leading" id="rGW-Vy-VsQ"/>
-                                            <constraint firstAttribute="bottom" secondItem="idD-Bs-35w" secondAttribute="bottom" id="tQ9-OW-qce"/>
-                                        </constraints>
-                                        <viewLayoutGuide key="contentLayoutGuide" id="Ko5-tO-Oul"/>
-                                        <viewLayoutGuide key="frameLayoutGuide" id="aog-NO-18L"/>
-                                    </scrollView>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="blu-Qp-AQc" secondAttribute="trailing" constant="10" id="9gS-jr-E1G"/>
-                                    <constraint firstItem="blu-Qp-AQc" firstAttribute="top" secondItem="npH-O3-Wo6" secondAttribute="top" constant="10" id="Krs-wV-BFS"/>
-                                    <constraint firstAttribute="bottom" secondItem="blu-Qp-AQc" secondAttribute="bottom" constant="10" id="Zrh-mB-e2j"/>
-                                    <constraint firstItem="blu-Qp-AQc" firstAttribute="leading" secondItem="npH-O3-Wo6" secondAttribute="leading" constant="10" id="lra-LN-WPQ"/>
+                                    <constraint firstAttribute="bottom" secondItem="idD-Bs-35w" secondAttribute="bottom" constant="10" id="ETI-qG-yDn"/>
+                                    <constraint firstAttribute="trailing" secondItem="idD-Bs-35w" secondAttribute="trailing" constant="10" id="JOV-Ap-S3a"/>
+                                    <constraint firstItem="idD-Bs-35w" firstAttribute="leading" secondItem="npH-O3-Wo6" secondAttribute="leading" constant="10" id="lKc-1p-ws5"/>
+                                    <constraint firstItem="idD-Bs-35w" firstAttribute="top" secondItem="npH-O3-Wo6" secondAttribute="top" constant="10" id="y5U-EB-8eY"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -319,12 +308,12 @@
                             <constraint firstItem="kZt-Dp-hxx" firstAttribute="top" secondItem="vwc-RE-ygp" secondAttribute="top" constant="10" id="RQq-u4-oET"/>
                             <constraint firstItem="BhL-mX-jOD" firstAttribute="leading" secondItem="vwc-RE-ygp" secondAttribute="leading" id="RZ7-Ev-zRJ"/>
                             <constraint firstItem="vwc-RE-ygp" firstAttribute="trailing" secondItem="kZt-Dp-hxx" secondAttribute="trailing" constant="10" id="UlQ-ak-9OR"/>
-                            <constraint firstItem="npH-O3-Wo6" firstAttribute="height" secondItem="0Rb-ba-A4L" secondAttribute="height" multiplier="0.25" id="dwX-kM-4Ox"/>
+                            <constraint firstItem="npH-O3-Wo6" firstAttribute="height" secondItem="0Rb-ba-A4L" secondAttribute="height" multiplier="0.08" id="dwX-kM-4Ox"/>
                             <constraint firstItem="kZt-Dp-hxx" firstAttribute="leading" secondItem="vwc-RE-ygp" secondAttribute="leading" constant="10" id="iPK-LE-jWo"/>
                             <constraint firstItem="vwc-RE-ygp" firstAttribute="trailing" secondItem="npH-O3-Wo6" secondAttribute="trailing" id="jCa-65-h59"/>
                             <constraint firstItem="BhL-mX-jOD" firstAttribute="height" secondItem="0Rb-ba-A4L" secondAttribute="height" multiplier="0.5" id="rK5-43-Mn6"/>
+                            <constraint firstItem="npH-O3-Wo6" firstAttribute="top" secondItem="kZt-Dp-hxx" secondAttribute="bottom" constant="10" id="rq5-gj-CMS"/>
                             <constraint firstItem="vwc-RE-ygp" firstAttribute="trailing" secondItem="BhL-mX-jOD" secondAttribute="trailing" id="uMg-gC-PoW"/>
-                            <constraint firstItem="vwc-RE-ygp" firstAttribute="bottom" secondItem="kZt-Dp-hxx" secondAttribute="bottom" constant="10" id="w2L-Pj-ziN"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="file.txt" id="EIv-PQ-wCq">
@@ -345,11 +334,14 @@
                         <outlet property="blackOnWhiteSchemeButton" destination="8is-kC-wC6" id="oCK-jN-d6n"/>
                         <outlet property="contentTextView" destination="amI-yp-jIN" id="Rwa-hs-xdb"/>
                         <outlet property="defaultSchemeButton" destination="Soi-Te-rMm" id="OGb-eU-Mls"/>
+                        <outlet property="definitionsTableView" destination="9as-as-hlW" id="525-2x-RfN"/>
                         <outlet property="dictionaryTermLabel" destination="X6c-Gb-9ah" id="xdO-0Q-thK"/>
                         <outlet property="fontSizeSlider" destination="edZ-l3-iMk" id="UJN-nM-1yR"/>
                         <outlet property="fontWeightSlider" destination="T4n-NG-2IQ" id="T1A-Dl-8S5"/>
                         <outlet property="readingSchemeButton" destination="AdS-sT-cfs" id="ay4-Dz-7uY"/>
                         <outlet property="termPronunciationButton" destination="QcS-UG-kmN" id="fQl-BA-4Mq"/>
+                        <outlet property="termView" destination="npH-O3-Wo6" id="Ft4-ly-f7q"/>
+                        <outlet property="termViewHeight" destination="dwX-kM-4Ox" id="FoD-cn-1k0"/>
                         <outlet property="textFormatView" destination="BhL-mX-jOD" id="e5P-qd-b2n"/>
                         <outlet property="whiteOnBlackSchemeButton" destination="vCh-Uv-JIp" id="AOc-Hf-jBI"/>
                     </connections>
