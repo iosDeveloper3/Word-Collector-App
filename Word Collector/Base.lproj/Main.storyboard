@@ -279,9 +279,10 @@
                                                     <action selector="pronunciationButtonTapped:" destination="KSX-v4-uj3" eventType="touchUpInside" id="XNI-vD-QYV"/>
                                                 </connections>
                                             </button>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="9as-as-hlW">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="9as-as-hlW">
                                                 <rect key="frame" x="0.0" y="51.5" width="394" height="0.0"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="separatorColor" systemColor="tintColor"/>
                                                 <connections>
                                                     <outlet property="dataSource" destination="KSX-v4-uj3" id="Xvf-r2-Wlz"/>
                                                     <outlet property="delegate" destination="KSX-v4-uj3" id="xoU-YU-oiJ"/>

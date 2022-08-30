@@ -35,7 +35,7 @@ class FileViewController: UIViewController {
         super.viewDidLoad()
         setBorderColorForMarkedButtons()
         setTextFormat()
-        contentTextView.handleWordAndPosition = { [weak self] (word, range) in
+        contentTextView.handleWordAndPosition = { [weak self] (word) in
             guard self?.term?.word != word else { return }
             self?.dictionaryTermLabel.text = word
             NetworkManager.shared.fetchEntries(for: word ?? "") { [weak self] (result) in
@@ -43,17 +43,16 @@ class FileViewController: UIViewController {
                 case .success(let entries):
                     self?.setNewDictionaryTerm(newTerm: DictionaryTerm(entries, for: word))
                 case .failure(let error):
-                    self?.dictionaryTermLabel.text = "No definition found"
+                    self?.setNewDictionaryTerm(newTerm: nil)
                     print(error)
                 }
             }
         }
         contentTextView.undoWordAndPosition = { [weak self] () in
-            self?.termView.isHidden = true
-            self?.termViewHeight = self?.termViewHeight.setMultiplier(multiplier: 0.01)
+            self?.hideTermView()
         }
         definitionsTableView.register(UINib(nibName: DefinitionTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: DefinitionTableViewCell.identifier)
-        termViewHeight = termViewHeight.setMultiplier(multiplier: 0.01)
+        hideTermView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -118,17 +117,31 @@ class FileViewController: UIViewController {
         readingSchemeButton.layer.borderColor = UIColor.label.cgColor
     }
     
-    func setNewDictionaryTerm(newTerm: DictionaryTerm) {
+    func setNewDictionaryTerm(newTerm: DictionaryTerm?) {
         term = newTerm
-        termPronunciationButton.setTitle(term?.phonetic, for: .normal)
+        if let term = term {
+            termPronunciationButton.setTitle(term.phonetic, for: .normal)
+            termPronunciationButton.isHidden = false
+        } else {
+            dictionaryTermLabel.text = "No translation found"
+            termPronunciationButton.isHidden = true
+        }
         definitionsTableView.reloadData()
+        showTermView()
+    }
+    
+    func hideTermView() {
+        termView.isHidden = true
+        termViewHeight = termViewHeight.setMultiplier(multiplier: 0.01)
+    }
+    
+    func showTermView() {
         termViewHeight = termViewHeight.setMultiplier(multiplier: 0.6)
         termView.isHidden = false
     }
 
     @IBAction func textFormatClicked(_ sender: Any) {
-        termView.isHidden = true
-        termViewHeight = termViewHeight.setMultiplier(multiplier: 0.01)
+        hideTermView()
         textFormatView.isHidden = false
     }
     

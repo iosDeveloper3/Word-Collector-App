@@ -9,7 +9,15 @@ import UIKit
 
 class TappedWordsRecognizingTextView: UITextView {
     
-    var handleWordAndPosition: ((String?, UITextRange?) -> Void)?
+    private var underlineRange: NSRange? {
+        willSet {
+            removeUnderline(range: underlineRange)
+        }
+        didSet {
+            addUnderline(range: underlineRange)
+        }
+    }
+    var handleWordAndPosition: ((String?) -> Void)?
     var undoWordAndPosition: (() -> Void)?
 
     required init?(coder: NSCoder) {
@@ -19,11 +27,14 @@ class TappedWordsRecognizingTextView: UITextView {
         addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:))))
     }
     
-    @objc func handleTap(_ sender: UITapGestureRecognizer) {
+    @objc private func handleTap(_ sender: UITapGestureRecognizer) {
+        
+        underlineRange = nil
+        
         undoWordAndPosition?()
     }
 
-    @objc func handleLongPress(_ sender: UILongPressGestureRecognizer) {
+    @objc private func handleLongPress(_ sender: UILongPressGestureRecognizer) {
         
         let position = sender.location(in: self)
         
@@ -33,6 +44,24 @@ class TappedWordsRecognizingTextView: UITextView {
             return
         }
         
-        handleWordAndPosition?(text(in: wordRange), wordRange)
+        underlineRange = NSRange(location: offset(from: beginningOfDocument, to: wordRange.start), length: offset(from: wordRange.start, to: wordRange.end))
+        
+        handleWordAndPosition?(text(in: wordRange))
+    }
+    
+    private func addUnderline(range: NSRange?) {
+        if let range = range {
+            let newAttributedText = NSMutableAttributedString(attributedString: attributedText)
+            newAttributedText.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range)
+            attributedText = newAttributedText
+        }
+    }
+    
+    private func removeUnderline(range: NSRange?) {
+        if let range = range {
+            let newAttributedText = NSMutableAttributedString(attributedString: attributedText)
+            newAttributedText.removeAttribute(NSAttributedString.Key.underlineStyle, range: range)
+            attributedText = newAttributedText
+        }
     }
 }
