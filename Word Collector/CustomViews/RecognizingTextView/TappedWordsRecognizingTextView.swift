@@ -17,7 +17,7 @@ class TappedWordsRecognizingTextView: UITextView {
             addUnderline(range: underlineRange)
         }
     }
-    var handleWordAndPosition: ((String?) -> Void)?
+    var handleWordAndPosition: ((String?, Int?) -> Void)?
     var undoWordAndPosition: (() -> Void)?
 
     required init?(coder: NSCoder) {
@@ -46,7 +46,7 @@ class TappedWordsRecognizingTextView: UITextView {
         
         underlineRange = NSRange(location: offset(from: beginningOfDocument, to: wordRange.start), length: offset(from: wordRange.start, to: wordRange.end))
         
-        handleWordAndPosition?(text(in: wordRange))
+        handleWordAndPosition?(text(in: wordRange), underlineRange?.location)
     }
     
     private func addUnderline(range: NSRange?) {

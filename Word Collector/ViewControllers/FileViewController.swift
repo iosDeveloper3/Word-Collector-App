@@ -24,24 +24,26 @@ class FileViewController: UIViewController {
     @IBOutlet weak var dictionaryTermLabel: UILabel!
     @IBOutlet weak var termPronunciationButton: UIButton!
     @IBOutlet weak var definitionsTableView: UITableView!
+    @IBOutlet weak var addToVocabularyButton: UIButton!
     
     let defaultFontSize: Float = 14
     let defaultFontWeight: Float = 3
     
     var fileName: String?
     var term: DictionaryTerm?
+    var vocabulary: Vocabulary?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setBorderColorForMarkedButtons()
         setTextFormat()
-        contentTextView.handleWordAndPosition = { [weak self] (word) in
+        contentTextView.handleWordAndPosition = { [weak self] (word, location) in
             guard self?.term?.word != word else { return }
             self?.dictionaryTermLabel.text = word
             NetworkManager.shared.fetchEntries(for: word ?? "") { [weak self] (result) in
                 switch result {
                 case .success(let entries):
-                    self?.setNewDictionaryTerm(newTerm: DictionaryTerm(entries, for: word))
+                    self?.setNewDictionaryTerm(newTerm: DictionaryTerm(entries, for: word, and: location))
                 case .failure(let error):
                     self?.setNewDictionaryTerm(newTerm: nil)
                     print(error)
@@ -65,6 +67,7 @@ class FileViewController: UIViewController {
             title = "Error"
             contentTextView.text = error.localizedDescription
         }
+        vocabulary = Vocabulary(savedWords: UserDefaults.standard.savedWords)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -80,6 +83,14 @@ class FileViewController: UIViewController {
         
         if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
             setBorderColorForMarkedButtons()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        if let savedWords = vocabulary?.getSavedWords() {
+            UserDefaults.standard.savedWords = savedWords
         }
     }
     
@@ -122,9 +133,12 @@ class FileViewController: UIViewController {
         if let term = term {
             termPronunciationButton.setTitle(term.phonetic, for: .normal)
             termPronunciationButton.isHidden = false
+            addToVocabularyButton.isSelected = vocabulary?.contains(word: SavedWord(word: term.word, fileName: fileName, locationInFile: term.locationInFile)) ?? false
+            addToVocabularyButton.isHidden = false
         } else {
             dictionaryTermLabel.text = "No translation found"
             termPronunciationButton.isHidden = true
+            addToVocabularyButton.isHidden = true
         }
         definitionsTableView.reloadData()
         showTermView()
@@ -186,6 +200,13 @@ class FileViewController: UIViewController {
     
     @IBAction func pronunciationButtonTapped(_ sender: Any) {
         term?.playPronunciation()
+    }
+    
+    @IBAction func saveWordButtonTapped(_ sender: Any) {
+        if let word = term?.word, let fileName = fileName, let locationInFile = term?.locationInFile {
+            vocabulary?.add(word: SavedWord(word: word, fileName: fileName, locationInFile: locationInFile))
+            addToVocabularyButton.isSelected = !addToVocabularyButton.isSelected
+        }
     }
 }
 
