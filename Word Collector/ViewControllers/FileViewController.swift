@@ -30,22 +30,26 @@ class FileViewController: UIViewController {
     let defaultFontWeight: Float = 3
     
     var fileName: String?
+    var word: String?
+    var wordLocation: Int?
     var term: DictionaryTerm?
-    var vocabulary: Vocabulary?
+    let vocabulary = Vocabulary.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setBorderColorForMarkedButtons()
         setTextFormat()
         contentTextView.handleWordAndPosition = { [weak self] (word, location) in
-            guard self?.term?.word != word else { return }
+            self?.wordLocation = location
+            self?.addToVocabularyButton.isSelected = self?.vocabulary.contains(word: SavedWord(word: word, fileName: self?.fileName, locationInFile: location)) ?? false
+            guard self?.word != word else { return }
             self?.dictionaryTermLabel.text = word
             NetworkManager.shared.fetchEntries(for: word ?? "") { [weak self] (result) in
                 switch result {
                 case .success(let entries):
-                    self?.setNewDictionaryTerm(newTerm: DictionaryTerm(entries, for: word, and: location))
+                    self?.setNewDictionaryTerm(newTerm: DictionaryTerm(entries), newWord: word)
                 case .failure(let error):
-                    self?.setNewDictionaryTerm(newTerm: nil)
+                    self?.setNewDictionaryTerm(newTerm: nil, newWord: nil)
                     print(error)
                 }
             }
@@ -64,10 +68,18 @@ class FileViewController: UIViewController {
             contentTextView.text = try StorageManager.readFile(fileName: fileName)
             title = fileName
         } catch {
-            title = "Error"
-            contentTextView.text = error.localizedDescription
+            title = ""
+            contentTextView.text = ""
+            let alert = UIAlertController(title: error.localizedDescription, message: "Do you want to leave?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            }))
+            present(alert, animated: true)
         }
-        vocabulary = Vocabulary(savedWords: UserDefaults.standard.savedWords)
+        if let word = word, let location = wordLocation {
+            self.word = nil
+            contentTextView.tap(word: word, starting: location)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -83,14 +95,6 @@ class FileViewController: UIViewController {
         
         if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
             setBorderColorForMarkedButtons()
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        if let savedWords = vocabulary?.getSavedWords() {
-            UserDefaults.standard.savedWords = savedWords
         }
     }
     
@@ -128,12 +132,12 @@ class FileViewController: UIViewController {
         readingSchemeButton.layer.borderColor = UIColor.label.cgColor
     }
     
-    func setNewDictionaryTerm(newTerm: DictionaryTerm?) {
+    func setNewDictionaryTerm(newTerm: DictionaryTerm?, newWord: String?) {
         term = newTerm
+        word = newWord
         if let term = term {
             termPronunciationButton.setTitle(term.phonetic, for: .normal)
             termPronunciationButton.isHidden = false
-            addToVocabularyButton.isSelected = vocabulary?.contains(word: SavedWord(word: term.word, fileName: fileName, locationInFile: term.locationInFile)) ?? false
             addToVocabularyButton.isHidden = false
         } else {
             dictionaryTermLabel.text = "No translation found"
@@ -203,8 +207,8 @@ class FileViewController: UIViewController {
     }
     
     @IBAction func saveWordButtonTapped(_ sender: Any) {
-        if let word = term?.word, let fileName = fileName, let locationInFile = term?.locationInFile {
-            vocabulary?.add(word: SavedWord(word: word, fileName: fileName, locationInFile: locationInFile))
+        if let word = word, let fileName = fileName, let locationInFile = wordLocation {
+            vocabulary.add(word: SavedWord(word: word, fileName: fileName, locationInFile: locationInFile))
             addToVocabularyButton.isSelected = !addToVocabularyButton.isSelected
         }
     }

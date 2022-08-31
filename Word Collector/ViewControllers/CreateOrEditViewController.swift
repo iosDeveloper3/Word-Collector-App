@@ -15,24 +15,32 @@ class CreateOrEditViewController: UIViewController {
     
     var fileName: String?
     var fileContent: String?
+    let vocabulary = Vocabulary.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         (self.navigationController as? CustomNavigationViewController)?.backDelegate = self
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         fileNameTextField.text = fileName
         fileContentTextView.text = fileContent
         fileNameTextField.isUserInteractionEnabled = (fileName == nil)
+        if vocabulary.containsWords(from: fileName) {
+            let alert = UIAlertController(title: "Possible data loss", message: "If you save a new version of this file, all links to words from it will be removed. Continue?", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Yes", style: .destructive))
+            alert.addAction(UIAlertAction(title: "No", style: .default, handler: { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            }))
+            
+            present(alert, animated: true)
+        }
     }
     
     @discardableResult private func saveChanges(ignoreUnnamedFile: Bool) -> Bool {
         do {
             try StorageManager.saveFile(fileName: fileNameTextField.text, fileContent: fileContentTextView.text)
+            vocabulary.removeAllFor(fileName: fileName)
             ProgressHUD.showSuccess("File saved")
             return true
         } catch {

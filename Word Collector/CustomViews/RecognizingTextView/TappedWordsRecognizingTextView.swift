@@ -64,4 +64,11 @@ class TappedWordsRecognizingTextView: UITextView {
             attributedText = newAttributedText
         }
     }
+    
+    func tap(word: String, starting position: Int) {
+        
+        underlineRange = NSRange(location: position, length: word.count)
+        
+        handleWordAndPosition?(word, position)
+    }
 }

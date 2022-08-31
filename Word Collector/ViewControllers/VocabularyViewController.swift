@@ -11,7 +11,7 @@ class VocabularyViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    let savedWords = UserDefaults.standard.savedWords
+    let vocabulary = Vocabulary.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,16 +23,23 @@ class VocabularyViewController: UIViewController {
 extension VocabularyViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        savedWords.count
+        return vocabulary.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: VocabularyTableViewCell.identifier, for: indexPath) as? VocabularyTableViewCell else {
             fatalError()
         }
-        cell.setup(savedWord: savedWords[indexPath.row])
+        cell.setup(savedWord: vocabulary.savedWord(at: indexPath.row))
         return cell
     }
     
-    // TODO: didselect...
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let vc = FileViewController.instantiate() {
+            vc.fileName = vocabulary.fileName(at: indexPath.row)
+            vc.word = vocabulary.word(at: indexPath.row)
+            vc.wordLocation = vocabulary.locationInFile(at: indexPath.row)
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
 }

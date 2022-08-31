@@ -7,19 +7,21 @@
 
 import Foundation
 
-struct Vocabulary {
+class Vocabulary {
+    
+    static let shared = Vocabulary()
     
     private var savedWords: [SavedWord]
     
-    init(savedWords: [SavedWord]) {
-        self.savedWords = UserDefaults.standard.savedWords
+    var count: Int {
+        return savedWords.count
     }
     
-    func getSavedWords() -> [SavedWord] {
-        return savedWords
+    private init() {
+        savedWords = UserDefaults.standard.savedWords
     }
     
-    mutating func add(word: SavedWord?) {
+    func add(word: SavedWord?) {
         
         guard let word = word else {
             return
@@ -27,10 +29,11 @@ struct Vocabulary {
 
         if !contains(word: word) {
             savedWords.append(word)
+            UserDefaults.standard.savedWords = savedWords
         }
     }
     
-    mutating func remove(word: SavedWord?) {
+    func remove(word: SavedWord?) {
         
         guard let word = word else {
             return
@@ -38,11 +41,27 @@ struct Vocabulary {
 
         if let wordIndex = savedWords.firstIndex(where: { $0 == word }) {
             savedWords.remove(at: wordIndex)
+            UserDefaults.standard.savedWords = savedWords
         }
     }
     
-    mutating func removeAllFor(fileName: String) {
+    func removeAllFor(fileName: String?) {
+        
+        guard let fileName = fileName else {
+            return
+        }
+        
         savedWords.removeAll(where: { $0.fileName == fileName })
+        UserDefaults.standard.savedWords = savedWords
+    }
+    
+    func containsWords(from file: String?) -> Bool {
+        
+        guard let file = file else {
+            return false
+        }
+
+        return savedWords.contains(where: { $0.fileName == file })
     }
     
     func contains(word: SavedWord?) -> Bool {
@@ -52,5 +71,21 @@ struct Vocabulary {
         }
 
         return savedWords.contains(where: { $0 == word })
+    }
+    
+    func savedWord(at index: Int) -> SavedWord {
+        return savedWords[index]
+    }
+    
+    func word(at index: Int) -> String {
+        return savedWords[index].word
+    }
+    
+    func fileName(at index: Int) -> String {
+        return savedWords[index].fileName
+    }
+    
+    func locationInFile(at index: Int) -> Int {
+        return savedWords[index].locationInFile
     }
 }

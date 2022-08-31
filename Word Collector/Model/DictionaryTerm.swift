@@ -10,18 +10,13 @@ import AVFoundation
 
 class DictionaryTerm {
     
-    let word: String?
-    let locationInFile: Int?
     let phonetic: String?
     let partsOfSpeach: [String]
     let information: [[Definition]]
     
     private var audioPlayer: AVAudioPlayer?
     
-    init(_ entries: [Entry], for word: String?, and location: Int?) {
-        
-        self.word = word
-        self.locationInFile = location
+    init(_ entries: [Entry]) {
         
         var bestPhonetic: String?
         var bestAudio: String?

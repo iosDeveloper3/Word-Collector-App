@@ -95,7 +95,7 @@
         <!--file.txt-->
         <scene sceneID="HQ0-L0-2uN">
             <objects>
-                <viewController id="KSX-v4-uj3" customClass="FileViewController" customModule="Word_Collector" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FileViewController" id="KSX-v4-uj3" customClass="FileViewController" customModule="Word_Collector" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0Rb-ba-A4L">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
