@@ -7,7 +7,16 @@
 
 import UIKit
 
+protocol TappedWordsRecognizingTextViewDelegate: AnyObject {
+    
+    func wordDidSelected(_ textView: TappedWordsRecognizingTextView, selectedWord: String?, selectionStartPosition: Int?)
+    
+    func wordDidUnselected(_ textView: TappedWordsRecognizingTextView)
+}
+
 class TappedWordsRecognizingTextView: UITextView {
+    
+    weak var tappedWordsRecognizingDelegate: TappedWordsRecognizingTextViewDelegate?
     
     private var underlineRange: NSRange? {
         willSet {
@@ -17,8 +26,6 @@ class TappedWordsRecognizingTextView: UITextView {
             addUnderline(range: underlineRange)
         }
     }
-    var handleWordAndPosition: ((String?, Int?) -> Void)?
-    var undoWordAndPosition: (() -> Void)?
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -31,7 +38,7 @@ class TappedWordsRecognizingTextView: UITextView {
         
         underlineRange = nil
         
-        undoWordAndPosition?()
+        tappedWordsRecognizingDelegate?.wordDidUnselected(self)
     }
 
     @objc private func handleLongPress(_ sender: UILongPressGestureRecognizer) {
@@ -46,7 +53,7 @@ class TappedWordsRecognizingTextView: UITextView {
         
         underlineRange = NSRange(location: offset(from: beginningOfDocument, to: wordRange.start), length: offset(from: wordRange.start, to: wordRange.end))
         
-        handleWordAndPosition?(text(in: wordRange), underlineRange?.location)
+        tappedWordsRecognizingDelegate?.wordDidSelected(self, selectedWord: text(in: wordRange), selectionStartPosition: underlineRange?.location)
     }
     
     private func addUnderline(range: NSRange?) {
@@ -69,6 +76,6 @@ class TappedWordsRecognizingTextView: UITextView {
         
         underlineRange = NSRange(location: position, length: word.count)
         
-        handleWordAndPosition?(word, position)
+        tappedWordsRecognizingDelegate?.wordDidSelected(self, selectedWord: word, selectionStartPosition: position)
     }
 }

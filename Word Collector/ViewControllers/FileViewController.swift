@@ -39,24 +39,7 @@ class FileViewController: UIViewController {
         super.viewDidLoad()
         setBorderColorForMarkedButtons()
         setTextFormat()
-        contentTextView.handleWordAndPosition = { [weak self] (word, location) in
-            self?.wordLocation = location
-            self?.addToVocabularyButton.isSelected = self?.vocabulary.contains(word: SavedWord(word: word, fileName: self?.fileName, locationInFile: location)) ?? false
-            guard self?.word != word else { return }
-            self?.dictionaryTermLabel.text = word
-            NetworkManager.shared.fetchEntries(for: word ?? "") { [weak self] (result) in
-                switch result {
-                case .success(let entries):
-                    self?.setNewDictionaryTerm(newTerm: DictionaryTerm(entries), newWord: word)
-                case .failure(let error):
-                    self?.setNewDictionaryTerm(newTerm: nil, newWord: nil)
-                    print(error)
-                }
-            }
-        }
-        contentTextView.undoWordAndPosition = { [weak self] () in
-            self?.hideTermView()
-        }
+        contentTextView.tappedWordsRecognizingDelegate = self
         definitionsTableView.register(UINib(nibName: DefinitionTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: DefinitionTableViewCell.identifier)
         hideTermView()
     }
@@ -234,5 +217,31 @@ extension FileViewController: UITableViewDelegate, UITableViewDataSource {
         }
         cell.setup(definition: term?.information[indexPath.section][indexPath.row] ?? Definition())
         return cell
+    }
+}
+
+extension FileViewController: TappedWordsRecognizingTextViewDelegate {
+    
+    func wordDidSelected(_ textView: TappedWordsRecognizingTextView, selectedWord: String?, selectionStartPosition: Int?) {
+        
+        wordLocation = selectionStartPosition
+        addToVocabularyButton.isSelected = vocabulary.contains(word: SavedWord(word: word, fileName: fileName, locationInFile: selectionStartPosition))
+        
+        guard selectedWord != word else { return }
+        
+        dictionaryTermLabel.text = selectedWord
+        NetworkManager.shared.fetchEntries(for: selectedWord ?? "") { [weak self] (result) in
+            switch result {
+            case .success(let entries):
+                self?.setNewDictionaryTerm(newTerm: DictionaryTerm(entries), newWord: selectedWord)
+            case .failure(let error):
+                self?.setNewDictionaryTerm(newTerm: nil, newWord: nil)
+                print(error)
+            }
+        }
+    }
+    
+    func wordDidUnselected(_ textView: TappedWordsRecognizingTextView) {
+        hideTermView()
     }
 }
