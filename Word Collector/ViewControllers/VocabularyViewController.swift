@@ -18,6 +18,10 @@ class VocabularyViewController: UIViewController {
         tableView.register(UINib(nibName: VocabularyTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: VocabularyTableViewCell.identifier)
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
+    }
 }
 
 extension VocabularyViewController: UITableViewDelegate, UITableViewDataSource {

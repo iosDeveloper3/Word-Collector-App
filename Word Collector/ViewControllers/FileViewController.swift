@@ -195,7 +195,12 @@ class FileViewController: UIViewController {
     
     @IBAction func saveWordButtonTapped(_ sender: Any) {
         if let word = word, let fileName = fileName, let locationInFile = wordLocation {
-            vocabulary.add(word: SavedWord(word: word, fileName: fileName, locationInFile: locationInFile))
+            if addToVocabularyButton.isSelected {
+                vocabulary.remove(word: SavedWord(word: word, fileName: fileName, locationInFile: locationInFile))
+            }
+            else {
+                vocabulary.add(word: SavedWord(word: word, fileName: fileName, locationInFile: locationInFile))
+            }
             addToVocabularyButton.isSelected = !addToVocabularyButton.isSelected
         }
     }
@@ -229,10 +234,11 @@ extension FileViewController: TappedWordsRecognizingTextViewDelegate {
     func wordDidSelected(_ textView: TappedWordsRecognizingTextView, selectedWord: String?, selectionStartPosition: Int?) {
         
         wordLocation = selectionStartPosition
-        addToVocabularyButton.isSelected = vocabulary.contains(word: SavedWord(word: word, fileName: fileName, locationInFile: selectionStartPosition))
+        addToVocabularyButton.isSelected = vocabulary.contains(word: SavedWord(word: selectedWord, fileName: fileName, locationInFile: selectionStartPosition))
         
         guard selectedWord != word else { return }
         
+        word = selectedWord
         dictionaryTermLabel.text = selectedWord
         NetworkManager.shared.fetchEntries(for: selectedWord ?? "") { [weak self] (result) in
             switch result {
