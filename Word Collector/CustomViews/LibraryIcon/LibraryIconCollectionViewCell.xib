@@ -19,15 +19,18 @@
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="wIb-bA-8hQ">
                         <rect key="frame" x="0.0" y="0.0" width="66" height="107"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s9X-eH-emf">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="doc.text" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="s9X-eH-emf">
                                 <rect key="frame" x="0.0" y="0.0" width="66" height="66"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="66" id="jgL-5s-5p3"/>
                                     <constraint firstAttribute="width" constant="66" id="r2b-4l-azJ"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MUN-JK-LwW">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="file.txt" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MUN-JK-LwW">
                                 <rect key="frame" x="0.0" y="66" width="66" height="41"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="41" id="MpF-AJ-k9Z"/>
                                 </constraints>
@@ -47,10 +50,12 @@
                 <constraint firstAttribute="trailing" secondItem="wIb-bA-8hQ" secondAttribute="trailing" id="z8N-OM-j9Z"/>
             </constraints>
             <connections>
-                <outlet property="fileImageView" destination="s9X-eH-emf" id="GJP-2Y-kAZ"/>
                 <outlet property="fileLabel" destination="MUN-JK-LwW" id="acf-wu-4fA"/>
             </connections>
             <point key="canvasLocation" x="137.68115942028987" y="102.79017857142857"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="doc.text" catalog="system" width="115" height="128"/>
+    </resources>
 </document>

@@ -21,6 +21,7 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YIW-uV-o9o">
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="61"/>
+                                <accessibility key="accessibilityConfiguration" hint="definition"/>
                                 <string key="text">to press switches on a machine so that it will start when you want it to
 </string>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
@@ -29,6 +30,7 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wq3-yc-QKB">
                                 <rect key="frame" x="0.0" y="73.5" width="300" height="41"/>
+                                <accessibility key="accessibilityConfiguration" hint="example"/>
                                 <string key="text">The interest rate has been set at 5%.
 </string>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>

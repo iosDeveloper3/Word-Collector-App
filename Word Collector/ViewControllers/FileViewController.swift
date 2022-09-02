@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import AVFoundation
-//import SwiftAudioPlayer
 
 class FileViewController: UIViewController {
     
@@ -102,10 +100,15 @@ class FileViewController: UIViewController {
     
     func markSchemeColorButton(_ button: UIButton) {
         defaultSchemeButton.layer.borderWidth = 0
+        defaultSchemeButton.accessibilityTraits.remove(.selected)
         blackOnWhiteSchemeButton.layer.borderWidth = 0
+        blackOnWhiteSchemeButton.accessibilityTraits.remove(.selected)
         whiteOnBlackSchemeButton.layer.borderWidth = 0
+        whiteOnBlackSchemeButton.accessibilityTraits.remove(.selected)
         readingSchemeButton.layer.borderWidth = 0
+        readingSchemeButton.accessibilityTraits.remove(.selected)
         button.layer.borderWidth = 2
+        button.accessibilityTraits.insert(.selected)
     }
     
     func setBorderColorForMarkedButtons() {
@@ -144,6 +147,7 @@ class FileViewController: UIViewController {
     @IBAction func textFormatClicked(_ sender: Any) {
         hideTermView()
         textFormatView.isHidden = false
+        UIAccessibility.post(notification: .layoutChanged, argument: textFormatView)
     }
     
     @IBAction func closeTextFormatClicked(_ sender: Any) {

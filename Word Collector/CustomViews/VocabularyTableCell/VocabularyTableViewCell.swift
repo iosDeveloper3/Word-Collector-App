@@ -15,5 +15,7 @@ class VocabularyTableViewCell: UITableViewCell {
     func setup(savedWord: SavedWord) {
         wordLabel.text = savedWord.word
         fileNameLabel.text = savedWord.fileName
+        accessibilityLabel = "See the word \(savedWord.word) in \(savedWord.fileName) file's context"
+        accessibilityTraits = [.button]
     }
 }

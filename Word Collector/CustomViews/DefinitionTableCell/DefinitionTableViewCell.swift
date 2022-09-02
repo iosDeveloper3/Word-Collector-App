@@ -16,8 +16,12 @@ class DefinitionTableViewCell: UITableViewCell {
     
     func setup(definition: Definition) {
         definitionLabel.text = definition.definition
+        definitionLabel.isAccessibilityElement = !(definitionLabel.text?.isEmpty ?? true)
         exampleLabel.text = definition.example
+        exampleLabel.isAccessibilityElement = !(exampleLabel.text?.isEmpty ?? true)
         synonymsLabel.text = definition.synonyms?.joined(separator: ", ").ifNotEmptyWith(prefix: "Synonyms: ")
+        synonymsLabel.isAccessibilityElement = !(synonymsLabel.text?.isEmpty ?? true)
         antonymsLabel.text = definition.antonyms?.joined(separator: ", ").ifNotEmptyWith(prefix: "Antonyms: ")
+        antonymsLabel.isAccessibilityElement = !(antonymsLabel.text?.isEmpty ?? true)
     }
 }

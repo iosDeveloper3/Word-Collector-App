@@ -7,7 +7,6 @@
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -31,16 +30,7 @@
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
-                                        <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="eER-ew-VJC">
-                                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="YV1-d4-B7h">
-                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                </collectionViewCellContentView>
-                                            </collectionViewCell>
-                                        </cells>
+                                        <cells/>
                                         <connections>
                                             <outlet property="dataSource" destination="BYZ-38-t0r" id="oIB-ra-rAy"/>
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="91g-hB-8vO"/>
@@ -72,11 +62,17 @@
                     <navigationItem key="navigationItem" title="Library" id="s5V-Jr-C9O">
                         <rightBarButtonItems>
                             <barButtonItem image="note.text.badge.plus" catalog="system" id="uiw-ia-Y81">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Create a new file"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <segue destination="WBz-Ix-YWz" kind="show" id="z8j-kx-Vd8"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem image="character.book.closed" catalog="system" id="Erb-f1-Zgl">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Open Vocabulary Inspector"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <segue destination="h0h-rd-BlI" kind="show" id="4bG-ti-Qmc"/>
                                 </connections>
@@ -129,30 +125,54 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="ptB-Y7-og2">
                                         <rect key="frame" x="10" y="10" width="394" height="428"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Format text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNm-sU-tWY">
-                                                <rect key="frame" x="0.0" y="0.0" width="394" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="daT-eh-ldC">
+                                                <rect key="frame" x="0.0" y="0.0" width="394" height="44"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Format text" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNm-sU-tWY">
+                                                        <rect key="frame" x="0.0" y="0.0" width="350" height="44"/>
+                                                        <accessibility key="accessibilityConfiguration">
+                                                            <accessibilityTraits key="traits" staticText="YES" header="YES"/>
+                                                        </accessibility>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dOY-Cd-gqE">
+                                                        <rect key="frame" x="350" y="0.0" width="44" height="44"/>
+                                                        <accessibility key="accessibilityConfiguration" label="Close text appearance menu"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="44" id="54O-zq-SJj"/>
+                                                            <constraint firstAttribute="width" constant="44" id="qA5-oF-c53"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="plain" image="xmark.app" catalog="system"/>
+                                                        <connections>
+                                                            <action selector="closeTextFormatClicked:" destination="KSX-v4-uj3" eventType="touchUpInside" id="vTR-Od-q62"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="14" minValue="9" maxValue="21" minimumValueImage="textformat.size.smaller" catalog="system" maximumValueImage="textformat.size.larger" translatesAutoresizingMaskIntoConstraints="NO" id="edZ-l3-iMk">
-                                                <rect key="frame" x="-2" y="92" width="398" height="31"/>
+                                                <rect key="frame" x="-2" y="109.5" width="398" height="31"/>
+                                                <accessibility key="accessibilityConfiguration" label="Change font size"/>
                                                 <connections>
                                                     <action selector="fontSizeChanged:" destination="KSX-v4-uj3" eventType="valueChanged" id="Wh8-ay-Rpc"/>
                                                 </connections>
                                             </slider>
                                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minValue="0.0" maxValue="8" minimumValueImage="textformat.size.larger" catalog="system" maximumValueImage="bold" translatesAutoresizingMaskIntoConstraints="NO" id="T4n-NG-2IQ">
-                                                <rect key="frame" x="-2" y="193.5" width="398" height="31"/>
+                                                <rect key="frame" x="-2" y="205" width="398" height="31"/>
+                                                <accessibility key="accessibilityConfiguration" label="Change font weight"/>
                                                 <connections>
                                                     <action selector="fontWeightChanged:" destination="KSX-v4-uj3" eventType="valueChanged" id="LMD-tb-Wgc"/>
                                                 </connections>
                                             </slider>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="wBS-ku-zQN">
-                                                <rect key="frame" x="0.0" y="294.5" width="394" height="31"/>
+                                                <rect key="frame" x="0.0" y="300.5" width="394" height="31"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Soi-Te-rMm">
                                                         <rect key="frame" x="0.0" y="0.0" width="91" height="31"/>
                                                         <color key="backgroundColor" name="appBackground"/>
+                                                        <accessibility key="accessibilityConfiguration" label="Default color scheme"/>
                                                         <buttonConfiguration key="configuration" style="plain" imagePlacement="top">
                                                             <imageReference key="image" image="square.text.square.fill" catalog="system" renderingMode="hierarchical">
                                                                 <hierarchicalColors>
@@ -172,6 +192,7 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8is-kC-wC6">
                                                         <rect key="frame" x="101" y="0.0" width="91" height="31"/>
                                                         <color key="backgroundColor" name="appBackground"/>
+                                                        <accessibility key="accessibilityConfiguration" label="Black text on white background"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" imagePlacement="top">
                                                             <imageReference key="image" image="square.text.square.fill" catalog="system" renderingMode="hierarchical">
@@ -192,6 +213,7 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vCh-Uv-JIp">
                                                         <rect key="frame" x="202" y="0.0" width="91" height="31"/>
                                                         <color key="backgroundColor" name="appBackground"/>
+                                                        <accessibility key="accessibilityConfiguration" label="White text on black background"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" imagePlacement="top">
                                                             <imageReference key="image" image="square.text.square.fill" catalog="system" renderingMode="hierarchical">
@@ -212,6 +234,7 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AdS-sT-cfs">
                                                         <rect key="frame" x="303" y="0.0" width="91" height="31"/>
                                                         <color key="backgroundColor" name="appBackground"/>
+                                                        <accessibility key="accessibilityConfiguration" label="Special color scheme for reading"/>
                                                         <state key="normal" title="Button"/>
                                                         <buttonConfiguration key="configuration" style="plain" imagePlacement="top">
                                                             <imageReference key="image" image="heart.text.square.fill" catalog="system" renderingMode="hierarchical">
@@ -235,6 +258,7 @@
                                             </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0IS-R5-j5J">
                                                 <rect key="frame" x="0.0" y="397" width="394" height="31"/>
+                                                <accessibility key="accessibilityConfiguration" label="Set default text appearance"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" title="Set to default"/>
                                                 <connections>
@@ -243,25 +267,11 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dOY-Cd-gqE">
-                                        <rect key="frame" x="370" y="0.0" width="44" height="44"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="54O-zq-SJj"/>
-                                            <constraint firstAttribute="width" constant="44" id="qA5-oF-c53"/>
-                                        </constraints>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="plain" image="xmark.app" catalog="system"/>
-                                        <connections>
-                                            <action selector="closeTextFormatClicked:" destination="KSX-v4-uj3" eventType="touchUpInside" id="vTR-Od-q62"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="ptB-Y7-og2" secondAttribute="bottom" constant="10" id="HtD-KK-xNd"/>
-                                    <constraint firstItem="dOY-Cd-gqE" firstAttribute="top" secondItem="BhL-mX-jOD" secondAttribute="top" id="LoK-2B-avP"/>
                                     <constraint firstItem="ptB-Y7-og2" firstAttribute="leading" secondItem="BhL-mX-jOD" secondAttribute="leading" constant="10" id="MDI-Po-NuU"/>
-                                    <constraint firstAttribute="trailing" secondItem="dOY-Cd-gqE" secondAttribute="trailing" id="g44-lh-EN6"/>
                                     <constraint firstAttribute="trailing" secondItem="ptB-Y7-og2" secondAttribute="trailing" constant="10" id="trq-oh-jV8"/>
                                     <constraint firstItem="ptB-Y7-og2" firstAttribute="top" secondItem="BhL-mX-jOD" secondAttribute="top" constant="10" id="yQw-zB-EKl"/>
                                 </constraints>
@@ -272,14 +282,37 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="idD-Bs-35w">
                                         <rect key="frame" x="10" y="10" width="394" height="51.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="emphasis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X6c-Gb-9ah">
-                                                <rect key="frame" x="0.0" y="0.0" width="394" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="yGd-rF-H7V">
+                                                <rect key="frame" x="0.0" y="0.0" width="394" height="44"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="emphasis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X6c-Gb-9ah">
+                                                        <rect key="frame" x="0.0" y="0.0" width="73" height="44"/>
+                                                        <accessibility key="accessibilityConfiguration" hint="chosen term"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DU9-Mq-sDz">
+                                                        <rect key="frame" x="350" y="0.0" width="44" height="44"/>
+                                                        <accessibility key="accessibilityConfiguration" label="Add to your vocabulary"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="JWF-Ry-vDx"/>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="o3t-ES-gXo"/>
+                                                        </constraints>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" image="plus.square" catalog="system"/>
+                                                        <state key="selected" image="minus.square" catalog="system"/>
+                                                        <connections>
+                                                            <action selector="saveWordButtonTapped:" destination="KSX-v4-uj3" eventType="touchUpInside" id="k0b-z4-749"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QcS-UG-kmN">
-                                                <rect key="frame" x="0.0" y="20.5" width="394" height="31"/>
+                                                <rect key="frame" x="0.0" y="44" width="394" height="7.5"/>
+                                                <accessibility key="accessibilityConfiguration" label="Play native pronunciation">
+                                                    <accessibilityTraits key="traits" button="YES" playsSound="YES" startsMediaSession="YES"/>
+                                                </accessibility>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="speaker.wave.3.fill" catalog="system" title="/ˈemfəsɪs/" imagePadding="10"/>
                                                 <connections>
@@ -297,26 +330,11 @@
                                             </tableView>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DU9-Mq-sDz">
-                                        <rect key="frame" x="370" y="0.0" width="44" height="44"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="JWF-Ry-vDx"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="44" id="o3t-ES-gXo"/>
-                                        </constraints>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="plus.square" catalog="system"/>
-                                        <state key="selected" image="minus.square" catalog="system"/>
-                                        <connections>
-                                            <action selector="saveWordButtonTapped:" destination="KSX-v4-uj3" eventType="touchUpInside" id="k0b-z4-749"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="idD-Bs-35w" secondAttribute="bottom" constant="10" id="ETI-qG-yDn"/>
                                     <constraint firstAttribute="trailing" secondItem="idD-Bs-35w" secondAttribute="trailing" constant="10" id="JOV-Ap-S3a"/>
-                                    <constraint firstAttribute="trailing" secondItem="DU9-Mq-sDz" secondAttribute="trailing" id="gyY-h1-dSb"/>
-                                    <constraint firstItem="DU9-Mq-sDz" firstAttribute="top" secondItem="npH-O3-Wo6" secondAttribute="top" id="jmp-BD-Uqe"/>
                                     <constraint firstItem="idD-Bs-35w" firstAttribute="leading" secondItem="npH-O3-Wo6" secondAttribute="leading" constant="10" id="lKc-1p-ws5"/>
                                     <constraint firstItem="idD-Bs-35w" firstAttribute="top" secondItem="npH-O3-Wo6" secondAttribute="top" constant="10" id="y5U-EB-8eY"/>
                                 </constraints>
@@ -342,11 +360,17 @@
                     <navigationItem key="navigationItem" title="file.txt" id="EIv-PQ-wCq">
                         <rightBarButtonItems>
                             <barButtonItem image="square.and.pencil" catalog="system" id="6ug-oh-Urg">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Open this file for editing"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <segue destination="WBz-Ix-YWz" kind="show" id="Sbp-Lg-Tc5"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem image="textformat.size.larger" catalog="system" id="vBG-5k-AdN">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Change text appearance"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="textFormatClicked:" destination="KSX-v4-uj3" id="rTF-tY-SmS"/>
                                 </connections>
@@ -424,17 +448,24 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="File name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ab0-o9-sLE">
                                         <rect key="frame" x="0.0" y="0.0" width="394" height="24"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <bool key="isElement" value="NO"/>
+                                        </accessibility>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JVg-3v-qac">
                                         <rect key="frame" x="0.0" y="34" width="394" height="24"/>
+                                        <accessibility key="accessibilityConfiguration" label="file name"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="File content:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="owe-3f-a39">
                                         <rect key="frame" x="0.0" y="68" width="394" height="24"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <bool key="isElement" value="NO"/>
+                                        </accessibility>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -442,6 +473,7 @@
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ngS-fT-NnO">
                                         <rect key="frame" x="0.0" y="102" width="394" height="652"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <accessibility key="accessibilityConfiguration" label="file content"/>
                                         <color key="textColor" systemColor="labelColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -465,11 +497,17 @@
                     <navigationItem key="navigationItem" title="Create / Edit" id="0RQ-PN-CSx">
                         <rightBarButtonItems>
                             <barButtonItem image="square.and.arrow.down" catalog="system" id="rdG-Fh-xdA">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Save this file"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="saveButtonTapped:" destination="WBz-Ix-YWz" id="UUH-WK-zYN"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem image="delete.backward" catalog="system" id="xfD-kT-9og">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="accessibilityLabel" value="Delete this file"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="deleteButtonTapped:" destination="WBz-Ix-YWz" id="Jc0-Y0-zYj"/>
                                 </connections>
