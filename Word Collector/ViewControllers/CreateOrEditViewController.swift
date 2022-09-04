@@ -65,11 +65,12 @@ class CreateOrEditViewController: UIViewController {
     }
     
     @IBAction func deleteButtonTapped(_ sender: Any) {
-        let alert = UIAlertController(title: "Delete file", message: "Are you sure you want to delete this file? You can't undo this action.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Delete this file", message: "Are you sure you want to delete this file? You can't undo this action.", preferredStyle: .alert)
         
         alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { [weak self] _ in
             do {
                 try StorageManager.deleteFile(fileName: self?.fileNameTextField.text)
+                self?.vocabulary.removeAllFor(fileName: self?.fileNameTextField.text)
                 ProgressHUD.showSuccess("File deleted")
                 self?.navigationController?.popToRootViewController(animated: true)
             } catch {
