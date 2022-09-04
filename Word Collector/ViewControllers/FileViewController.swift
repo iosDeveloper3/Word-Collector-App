@@ -9,6 +9,7 @@ import UIKit
 
 class FileViewController: UIViewController {
     
+    @IBOutlet weak var wordCollectionView: UICollectionView!
     @IBOutlet weak var contentTextView: TappedWordsRecognizingTextView!
     @IBOutlet weak var textFormatView: UIView!
     @IBOutlet weak var fontSizeSlider: UISlider!
@@ -28,6 +29,8 @@ class FileViewController: UIViewController {
     let defaultFontWeight: Float = 3
     
     var fileName: String?
+    var content: TextContent?
+    var wordCollection = [String]()
     var word: String?
     var wordLocation: Int?
     var term: DictionaryTerm?
@@ -46,11 +49,11 @@ class FileViewController: UIViewController {
         super.viewWillAppear(animated)
         
         do {
-            contentTextView.text = try StorageManager.readFile(fileName: fileName)
+            content = TextContent(try StorageManager.readFile(fileName: fileName))
             title = fileName
         } catch {
             title = ""
-            contentTextView.text = ""
+            content = TextContent("")
             let alert = UIAlertController(title: error.localizedDescription, message: "Do you want to leave?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { [weak self] _ in
                 self?.navigationController?.popViewController(animated: true)
@@ -59,14 +62,14 @@ class FileViewController: UIViewController {
         }
         if let word = word, let location = wordLocation {
             self.word = nil
-            contentTextView.tap(word: word, starting: location)
+            openTermInspector(selectedWord: word, selectedWordNumber: location)
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? CreateOrEditViewController {
             vc.fileName = title
-            vc.fileContent = contentTextView.text
+            vc.fileContent = content?.text
         }
     }
     
@@ -140,8 +143,29 @@ class FileViewController: UIViewController {
     }
     
     func showTermView() {
+        UIAccessibility.post(notification: .layoutChanged, argument: termView)
         termViewHeight = termViewHeight.setMultiplier(multiplier: 0.6)
         termView.isHidden = false
+    }
+    
+    func openTermInspector(selectedWord: String?, selectedWordNumber: Int?) {
+        
+        wordLocation = selectedWordNumber
+        addToVocabularyButton.isSelected = vocabulary.contains(word: SavedWord(word: selectedWord, fileName: fileName, locationInFile: wordLocation))
+        
+        guard selectedWord != word else { return }
+        
+        word = selectedWord
+        dictionaryTermLabel.text = selectedWord
+        NetworkManager.shared.fetchEntries(for: selectedWord ?? "") { [weak self] (result) in
+            switch result {
+            case .success(let entries):
+                self?.setNewDictionaryTerm(newTerm: DictionaryTerm(entries), newWord: selectedWord)
+            case .failure(let error):
+                self?.setNewDictionaryTerm(newTerm: nil, newWord: nil)
+                print(error)
+            }
+        }
     }
 
     @IBAction func textFormatClicked(_ sender: Any) {
@@ -204,6 +228,10 @@ class FileViewController: UIViewController {
             addToVocabularyButton.isSelected = !addToVocabularyButton.isSelected
         }
     }
+    
+    @IBAction func closeTermInspectorButtonTapped(_ sender: Any) {
+        hideTermView()
+    }
 }
 
 extension FileViewController: UITableViewDelegate, UITableViewDataSource {
@@ -233,25 +261,38 @@ extension FileViewController: TappedWordsRecognizingTextViewDelegate {
     
     func wordDidSelected(_ textView: TappedWordsRecognizingTextView, selectedWord: String?, selectionStartPosition: Int?) {
         
-        wordLocation = selectionStartPosition
-        addToVocabularyButton.isSelected = vocabulary.contains(word: SavedWord(word: selectedWord, fileName: fileName, locationInFile: selectionStartPosition))
-        
-        guard selectedWord != word else { return }
-        
-        word = selectedWord
-        dictionaryTermLabel.text = selectedWord
-        NetworkManager.shared.fetchEntries(for: selectedWord ?? "") { [weak self] (result) in
-            switch result {
-            case .success(let entries):
-                self?.setNewDictionaryTerm(newTerm: DictionaryTerm(entries), newWord: selectedWord)
-            case .failure(let error):
-                self?.setNewDictionaryTerm(newTerm: nil, newWord: nil)
-                print(error)
-            }
-        }
+        openTermInspector(selectedWord: selectedWord, selectedWordNumber: selectionStartPosition)
     }
     
     func wordDidUnselected(_ textView: TappedWordsRecognizingTextView) {
         hideTermView()
+    }
+}
+
+extension FileViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return content?.words.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WordCollectionViewCell.identifier, for: indexPath) as? WordCollectionViewCell else {
+            fatalError()
+        }
+        cell.setup(word: content?.words[indexPath.row])
+        if let location = wordLocation, location == indexPath.row {
+            cell.wordLabel.addUnderline()
+        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let location = wordLocation, let cell = collectionView.cellForItem(at: IndexPath(item: location, section: 0)) as? WordCollectionViewCell {
+            cell.wordLabel.removeUnderline()
+        }
+        if let cell = collectionView.cellForItem(at: indexPath) as? WordCollectionViewCell {
+            cell.wordLabel.addUnderline()
+        }
+        openTermInspector(selectedWord: content?.words[indexPath.row], selectedWordNumber: indexPath.row)
     }
 }
