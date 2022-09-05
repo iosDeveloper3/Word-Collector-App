@@ -10,7 +10,6 @@ import UIKit
 class FileViewController: UIViewController {
     
     @IBOutlet weak var wordCollectionView: UICollectionView!
-    @IBOutlet weak var contentTextView: TappedWordsRecognizingTextView!
     @IBOutlet weak var textFormatView: UIView!
     @IBOutlet weak var fontSizeSlider: UISlider!
     @IBOutlet weak var fontWeightSlider: UISlider!
@@ -25,11 +24,9 @@ class FileViewController: UIViewController {
     @IBOutlet weak var definitionsTableView: UITableView!
     @IBOutlet weak var addToVocabularyButton: UIButton!
     
-    let defaultFontSize: Float = 14
-    let defaultFontWeight: Float = 3
-    
     var fileName: String?
     var content: TextContent?
+    var textFormat = TextFormat()
     var wordCollection = [String]()
     var word: String?
     var wordLocation: Int?
@@ -40,7 +37,6 @@ class FileViewController: UIViewController {
         super.viewDidLoad()
         setBorderColorForMarkedButtons()
         setTextFormat()
-        contentTextView.tappedWordsRecognizingDelegate = self
         definitionsTableView.register(UINib(nibName: DefinitionTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: DefinitionTableViewCell.identifier)
         hideTermView()
     }
@@ -83,11 +79,9 @@ class FileViewController: UIViewController {
     }
     
     func setTextFormat() {
-        fontSizeSlider.value = UserDefaults.standard.fontSize ?? defaultFontSize
-        fontWeightSlider.value = UserDefaults.standard.fontWeight ?? defaultFontWeight
-        contentTextView.font = contentTextView.font?.withSize(CGFloat(fontSizeSlider.value)).withWeight(UIFont.Weight.allValues[Int(fontWeightSlider.value)])
-        let colorScheme = ColorScheme(rawValue: UserDefaults.standard.colorScheme) ?? .defaultScheme
-        switch colorScheme {
+        fontSizeSlider.value = textFormat.fontSize
+        fontWeightSlider.value = textFormat.fontWeight
+        switch textFormat.colorScheme {
         case .blackOnWhite:
             markSchemeColorButton(blackOnWhiteSchemeButton)
         case .whiteOnBlack:
@@ -97,8 +91,8 @@ class FileViewController: UIViewController {
         default:
             markSchemeColorButton(defaultSchemeButton)
         }
-        view.backgroundColor = colorScheme.backgroundColor
-        contentTextView.textColor = colorScheme.fontColor
+        view.backgroundColor = textFormat.colorScheme.backgroundColor
+        wordCollectionView.reloadData()
     }
     
     func markSchemeColorButton(_ button: UIButton) {
@@ -179,13 +173,13 @@ class FileViewController: UIViewController {
     }
     
     @IBAction func fontSizeChanged(_ sender: UISlider) {
-        contentTextView.font = contentTextView.font?.withSize(CGFloat(sender.value))
-        UserDefaults.standard.fontSize = sender.value
+        textFormat.fontSize = sender.value
+        wordCollectionView.reloadData()
     }
     
     @IBAction func fontWeightChanged(_ sender: UISlider) {
-        contentTextView.font = contentTextView.font?.withWeight(UIFont.Weight.allValues[Int(sender.value)])
-        UserDefaults.standard.fontWeight = sender.value
+        textFormat.fontWeight = sender.value
+        wordCollectionView.reloadData()
     }
     
     @IBAction func shemeButtonClicked(_ sender: UIButton) {
@@ -201,15 +195,13 @@ class FileViewController: UIViewController {
             colorScheme = .defaultScheme
         }
         view.backgroundColor = colorScheme.backgroundColor
-        contentTextView.textColor = colorScheme.fontColor
+        textFormat.colorScheme = colorScheme
+        wordCollectionView.reloadData()
         markSchemeColorButton(sender)
-        UserDefaults.standard.colorScheme = colorScheme.rawValue
     }
     
     @IBAction func setToDefaultButtonClicked(_ sender: Any) {
-        UserDefaults.standard.fontSize = defaultFontSize
-        UserDefaults.standard.fontWeight = defaultFontWeight
-        UserDefaults.standard.colorScheme = ColorScheme.defaultScheme.rawValue
+        textFormat.setToDefault()
         setTextFormat()
     }
     
@@ -257,18 +249,6 @@ extension FileViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension FileViewController: TappedWordsRecognizingTextViewDelegate {
-    
-    func wordDidSelected(_ textView: TappedWordsRecognizingTextView, selectedWord: String?, selectionStartPosition: Int?) {
-        
-        openTermInspector(selectedWord: selectedWord, selectedWordNumber: selectionStartPosition)
-    }
-    
-    func wordDidUnselected(_ textView: TappedWordsRecognizingTextView) {
-        hideTermView()
-    }
-}
-
 extension FileViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -279,6 +259,8 @@ extension FileViewController: UICollectionViewDelegate, UICollectionViewDataSour
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WordCollectionViewCell.identifier, for: indexPath) as? WordCollectionViewCell else {
             fatalError()
         }
+        cell.wordLabel.font = cell.wordLabel.font.withSize(CGFloat(textFormat.fontSize)).withWeight(UIFont.Weight.allValues[Int(textFormat.fontWeight)])
+        cell.wordLabel.textColor = textFormat.colorScheme.fontColor
         cell.setup(word: content?.words[indexPath.row])
         if let location = wordLocation, location == indexPath.row {
             cell.wordLabel.addUnderline()

@@ -102,8 +102,8 @@
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qo7-Sy-2hs">
                                         <rect key="frame" x="0.0" y="0.0" width="394" height="682.5"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8UY-Td-73e">
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="5" id="8UY-Td-73e">
                                             <size key="itemSize" width="128" height="128"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -146,32 +146,14 @@
                                             <outlet property="delegate" destination="KSX-v4-uj3" id="CpW-As-42x"/>
                                         </connections>
                                     </collectionView>
-                                    <textView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="amI-yp-jIN" customClass="TappedWordsRecognizingTextView" customModule="Word_Collector" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="394" height="682.5"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                        <color key="textColor" systemColor="labelColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="qo7-Sy-2hs" firstAttribute="height" secondItem="kZt-Dp-hxx" secondAttribute="height" id="3cU-sX-Mcm"/>
-                                    <constraint firstItem="amI-yp-jIN" firstAttribute="width" secondItem="kZt-Dp-hxx" secondAttribute="width" id="AF2-SC-oyM"/>
-                                    <constraint firstAttribute="bottom" secondItem="amI-yp-jIN" secondAttribute="bottom" id="Fc3-yn-IZW"/>
                                     <constraint firstAttribute="trailing" secondItem="qo7-Sy-2hs" secondAttribute="trailing" id="I6K-eB-siY"/>
-                                    <constraint firstItem="amI-yp-jIN" firstAttribute="leading" secondItem="kZt-Dp-hxx" secondAttribute="leading" id="JE0-Cm-Deg"/>
-                                    <constraint firstItem="amI-yp-jIN" firstAttribute="height" secondItem="kZt-Dp-hxx" secondAttribute="height" id="KJz-KW-rU4"/>
-                                    <constraint firstItem="amI-yp-jIN" firstAttribute="leading" secondItem="kZt-Dp-hxx" secondAttribute="leading" id="L5S-rU-xA3"/>
                                     <constraint firstAttribute="bottom" secondItem="qo7-Sy-2hs" secondAttribute="bottom" id="Tzn-au-bev"/>
-                                    <constraint firstItem="amI-yp-jIN" firstAttribute="top" secondItem="kZt-Dp-hxx" secondAttribute="top" id="VMZ-Nm-KTI"/>
                                     <constraint firstItem="qo7-Sy-2hs" firstAttribute="top" secondItem="kZt-Dp-hxx" secondAttribute="top" id="fnR-aG-tam"/>
                                     <constraint firstItem="qo7-Sy-2hs" firstAttribute="width" secondItem="kZt-Dp-hxx" secondAttribute="width" id="mDj-g3-f8X"/>
-                                    <constraint firstAttribute="trailing" secondItem="amI-yp-jIN" secondAttribute="trailing" id="ohq-KK-dqp"/>
-                                    <constraint firstAttribute="trailing" secondItem="amI-yp-jIN" secondAttribute="trailing" id="rH5-b6-VZX"/>
                                     <constraint firstItem="qo7-Sy-2hs" firstAttribute="leading" secondItem="kZt-Dp-hxx" secondAttribute="leading" id="tVF-dy-jvy"/>
-                                    <constraint firstAttribute="bottom" secondItem="amI-yp-jIN" secondAttribute="bottom" id="vd9-L2-lps"/>
-                                    <constraint firstItem="amI-yp-jIN" firstAttribute="top" secondItem="kZt-Dp-hxx" secondAttribute="top" id="wwQ-3I-UOJ"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="Dwp-dP-hf1"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="LJG-IB-UEn"/>
@@ -452,7 +434,6 @@
                     <connections>
                         <outlet property="addToVocabularyButton" destination="DU9-Mq-sDz" id="b4A-1F-P94"/>
                         <outlet property="blackOnWhiteSchemeButton" destination="8is-kC-wC6" id="oCK-jN-d6n"/>
-                        <outlet property="contentTextView" destination="amI-yp-jIN" id="Rwa-hs-xdb"/>
                         <outlet property="defaultSchemeButton" destination="Soi-Te-rMm" id="OGb-eU-Mls"/>
                         <outlet property="definitionsTableView" destination="9as-as-hlW" id="525-2x-RfN"/>
                         <outlet property="dictionaryTermLabel" destination="X6c-Gb-9ah" id="xdO-0Q-thK"/>

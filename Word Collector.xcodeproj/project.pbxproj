@@ -21,6 +21,7 @@
 		6F48597828BBB89D00B1FA71 /* License.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F48597728BBB89D00B1FA71 /* License.swift */; };
 		6F48597A28BBB8D500B1FA71 /* Phonetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F48597928BBB8D500B1FA71 /* Phonetic.swift */; };
 		6F48597C28BBB95300B1FA71 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F48597B28BBB95300B1FA71 /* Entry.swift */; };
+		6F52DF1428C684F700625B4A /* TextFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F52DF1328C684F700625B4A /* TextFormat.swift */; };
 		6F672C0028C4EC9E00B085C3 /* WordCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F672BFF28C4EC9E00B085C3 /* WordCollectionViewCell.swift */; };
 		6F672C0228C4F0C400B085C3 /* TextContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F672C0128C4F0C400B085C3 /* TextContent.swift */; };
 		6F672C0628C509C700B085C3 /* UILabel+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F672C0528C509C700B085C3 /* UILabel+Extension.swift */; };
@@ -82,6 +83,7 @@
 		6F48597728BBB89D00B1FA71 /* License.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = License.swift; sourceTree = "<group>"; };
 		6F48597928BBB8D500B1FA71 /* Phonetic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phonetic.swift; sourceTree = "<group>"; };
 		6F48597B28BBB95300B1FA71 /* Entry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entry.swift; sourceTree = "<group>"; };
+		6F52DF1328C684F700625B4A /* TextFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFormat.swift; sourceTree = "<group>"; };
 		6F672BFF28C4EC9E00B085C3 /* WordCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordCollectionViewCell.swift; sourceTree = "<group>"; };
 		6F672C0128C4F0C400B085C3 /* TextContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextContent.swift; sourceTree = "<group>"; };
 		6F672C0528C509C700B085C3 /* UILabel+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extension.swift"; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 				6F6F7A5928BF6CE50039F1B9 /* SavedWord.swift */,
 				6F6F7A5B28BF71EC0039F1B9 /* Vocabulary.swift */,
 				6F672C0128C4F0C400B085C3 /* TextContent.swift */,
+				6F52DF1328C684F700625B4A /* TextFormat.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -515,6 +518,7 @@
 				6F48597428BBB7AB00B1FA71 /* Definition.swift in Sources */,
 				6F294F3928BBDFFA002A0F70 /* DictionaryTerm.swift in Sources */,
 				6FE1460928B52ABC005B112F /* SceneDelegate.swift in Sources */,
+				6F52DF1428C684F700625B4A /* TextFormat.swift in Sources */,
 				6F48597C28BBB95300B1FA71 /* Entry.swift in Sources */,
 				6F48596C28BBA77900B1FA71 /* NetworkManager.swift in Sources */,
 				6F48596E28BBA98D00B1FA71 /* Route.swift in Sources */,
