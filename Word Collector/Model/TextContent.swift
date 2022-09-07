@@ -10,10 +10,15 @@ import Foundation
 struct TextContent {
     
     let text: String
-    let words: [String]
+    let paragraphs: [[String]]
     
     init(_ content: String) {
         text = content
-        words = text.components(separatedBy: CharacterSet(charactersIn: " \n")).filter({ !$0.isEmpty })
+        let lines = text.components(separatedBy: CharacterSet(charactersIn: "\n"))
+        var tmpParagraphs = [[String]]()
+        for line in lines {
+            tmpParagraphs.append(line.components(separatedBy: CharacterSet(charactersIn: " ")).filter({ !$0.isEmpty }))
+        }
+        paragraphs = tmpParagraphs
     }
 }

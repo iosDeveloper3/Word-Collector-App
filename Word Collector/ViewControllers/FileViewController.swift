@@ -29,7 +29,7 @@ class FileViewController: UIViewController {
     var textFormat = TextFormat()
     var wordCollection = [String]()
     var word: String?
-    var wordLocation: Int?
+    var wordLocation: IndexPath?
     var term: DictionaryTerm?
     let vocabulary = Vocabulary.shared
     
@@ -59,7 +59,7 @@ class FileViewController: UIViewController {
         wordCollectionView.reloadData()
         if let word = word, let location = wordLocation {
             self.word = nil
-            openTermInspector(selectedWord: word, selectedWordNumber: location)
+            openTermInspector(selectedWord: word, indexPath: location)
         }
     }
     
@@ -143,10 +143,10 @@ class FileViewController: UIViewController {
         termView.isHidden = false
     }
     
-    func openTermInspector(selectedWord: String?, selectedWordNumber: Int?) {
+    func openTermInspector(selectedWord: String?, indexPath: IndexPath?) {
         
-        wordLocation = selectedWordNumber
-        addToVocabularyButton.isSelected = vocabulary.contains(word: SavedWord(word: selectedWord, fileName: fileName, locationInFile: wordLocation))
+        wordLocation = indexPath
+        addToVocabularyButton.isSelected = vocabulary.contains(word: SavedWord(word: selectedWord, fileName: fileName, paragraphNumber: indexPath?.section, wordNumber: indexPath?.row))
         
         guard selectedWord != word else { return }
         
@@ -213,10 +213,10 @@ class FileViewController: UIViewController {
     @IBAction func saveWordButtonTapped(_ sender: Any) {
         if let word = word, let fileName = fileName, let locationInFile = wordLocation {
             if addToVocabularyButton.isSelected {
-                vocabulary.remove(word: SavedWord(word: word, fileName: fileName, locationInFile: locationInFile))
+                vocabulary.remove(word: SavedWord(word: word, fileName: fileName, paragraphNumber: locationInFile.section, wordNumber: locationInFile.row))
             }
             else {
-                vocabulary.add(word: SavedWord(word: word, fileName: fileName, locationInFile: locationInFile))
+                vocabulary.add(word: SavedWord(word: word, fileName: fileName, paragraphNumber: locationInFile.section, wordNumber: locationInFile.row))
             }
             addToVocabularyButton.isSelected = !addToVocabularyButton.isSelected
         }
@@ -252,8 +252,12 @@ extension FileViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension FileViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return content?.paragraphs.count ?? 0
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return content?.words.count ?? 0
+        return content?.paragraphs[section].count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -262,20 +266,20 @@ extension FileViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         cell.wordLabel.font = cell.wordLabel.font.withSize(CGFloat(textFormat.fontSize)).withWeight(UIFont.Weight.allValues[Int(textFormat.fontWeight)])
         cell.wordLabel.textColor = textFormat.colorScheme.fontColor
-        cell.setup(word: content?.words[indexPath.row])
-        if let location = wordLocation, location == indexPath.row {
+        cell.setup(word: content?.paragraphs[indexPath.section][indexPath.row])
+        if let location = wordLocation, location.section == indexPath.section && location.row == indexPath.row {
             cell.wordLabel.addUnderline()
         }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let location = wordLocation, let cell = collectionView.cellForItem(at: IndexPath(item: location, section: 0)) as? WordCollectionViewCell {
+        if let location = wordLocation, let cell = collectionView.cellForItem(at: location) as? WordCollectionViewCell {
             cell.wordLabel.removeUnderline()
         }
         if let cell = collectionView.cellForItem(at: indexPath) as? WordCollectionViewCell {
             cell.wordLabel.addUnderline()
         }
-        openTermInspector(selectedWord: content?.words[indexPath.row], selectedWordNumber: indexPath.row)
+        openTermInspector(selectedWord: content?.paragraphs[indexPath.section][indexPath.row], indexPath: indexPath)
     }
 }

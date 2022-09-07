@@ -85,7 +85,11 @@ class Vocabulary {
         return savedWords[index].fileName
     }
     
-    func locationInFile(at index: Int) -> Int {
-        return savedWords[index].locationInFile
+    func paragraphNumber(at index: Int) -> Int {
+        return savedWords[index].paragraphNumber
+    }
+    
+    func wordNumber(at index: Int) -> Int {
+        return savedWords[index].wordNumber
     }
 }

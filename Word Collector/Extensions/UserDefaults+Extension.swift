@@ -37,15 +37,16 @@ extension UserDefaults {
             guard
                 let words = object(forKey: #function + SavedWord.wordId) as? [String],
                 let fileNames = object(forKey: #function + SavedWord.fileNameId) as? [String],
-                let locationsInFile = object(forKey: #function + SavedWord.locationInFileId) as? [Int],
-                words.count == fileNames.count && words.count == locationsInFile.count
+                let paragraphNumbers = object(forKey: #function + SavedWord.paragraphNumberId) as? [Int],
+                let wordNumbers = object(forKey: #function + SavedWord.wordNumberId) as? [Int],
+                words.count == fileNames.count && fileNames.count == paragraphNumbers.count && paragraphNumbers.count == wordNumbers.count
             else {
                 return [SavedWord]()
             }
             
             var result = [SavedWord]()
             for i in 0 ..< words.count {
-                result.append(SavedWord(word: words[i], fileName: fileNames[i], locationInFile: locationsInFile[i]))
+                result.append(SavedWord(word: words[i], fileName: fileNames[i], paragraphNumber: paragraphNumbers[i], wordNumber: wordNumbers[i]))
             }
             
             return result
@@ -53,17 +54,20 @@ extension UserDefaults {
         set {
             var words = [String]()
             var fileNames = [String]()
-            var locationsInFile = [Int]()
+            var paragraphNumbers = [Int]()
+            var wordNumbers = [Int]()
             
             for savedWord in newValue {
                 words.append(savedWord.word)
                 fileNames.append(savedWord.fileName)
-                locationsInFile.append(savedWord.locationInFile)
+                paragraphNumbers.append(savedWord.paragraphNumber)
+                wordNumbers.append(savedWord.wordNumber)
             }
             
             set(words, forKey: #function + SavedWord.wordId)
             set(fileNames, forKey: #function + SavedWord.fileNameId)
-            set(locationsInFile, forKey: #function + SavedWord.locationInFileId)
+            set(paragraphNumbers, forKey: #function + SavedWord.paragraphNumberId)
+            set(wordNumbers, forKey: #function + SavedWord.wordNumberId)
         }
     }
 }

@@ -42,7 +42,7 @@ extension VocabularyViewController: UITableViewDelegate, UITableViewDataSource {
         if let vc = FileViewController.instantiate() {
             vc.fileName = vocabulary.fileName(at: indexPath.row)
             vc.word = vocabulary.word(at: indexPath.row)
-            vc.wordLocation = vocabulary.locationInFile(at: indexPath.row)
+            vc.wordLocation = IndexPath(row: vocabulary.wordNumber(at: indexPath.row), section: vocabulary.paragraphNumber(at: indexPath.row))
             navigationController?.pushViewController(vc, animated: true)
         }
     }

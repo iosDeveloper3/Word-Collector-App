@@ -10,24 +10,28 @@ import Foundation
 struct SavedWord: Equatable {
     static let wordId = "word"
     static let fileNameId = "fileName"
-    static let locationInFileId = "locationInFile"
+    static let paragraphNumberId = "paragraphNumber"
+    static let wordNumberId = "wordNumber"
     
     let word: String
     let fileName: String
-    let locationInFile: Int
+    let paragraphNumber: Int
+    let wordNumber: Int
     
-    init(word: String, fileName: String, locationInFile: Int) {
+    init(word: String, fileName: String, paragraphNumber: Int, wordNumber: Int) {
         self.word = word
         self.fileName = fileName
-        self.locationInFile = locationInFile
+        self.paragraphNumber = paragraphNumber
+        self.wordNumber = wordNumber
     }
     
-    init?(word: String?, fileName: String?, locationInFile: Int?) {
-        guard let word = word, let fileName = fileName, let locationInFile = locationInFile else {
+    init?(word: String?, fileName: String?, paragraphNumber: Int?, wordNumber: Int?) {
+        guard let word = word, let fileName = fileName, let paragraphNumber = paragraphNumber, let wordNumber = wordNumber else {
             return nil
         }
         self.word = word
         self.fileName = fileName
-        self.locationInFile = locationInFile
+        self.paragraphNumber = paragraphNumber
+        self.wordNumber = wordNumber
     }
 }
