@@ -56,6 +56,7 @@ class FileViewController: UIViewController {
             }))
             present(alert, animated: true)
         }
+        wordCollectionView.reloadData()
         if let word = word, let location = wordLocation {
             self.word = nil
             openTermInspector(selectedWord: word, selectedWordNumber: location)

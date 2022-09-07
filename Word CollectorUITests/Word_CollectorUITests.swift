@@ -21,6 +21,36 @@ class Word_CollectorUITests: XCTestCase {
     override func tearDownWithError() throws {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    func testEditedFileIsRefreshedInReadingMode() throws {
+        
+        let app = XCUIApplication()
+        app.launch()
+
+        app.navigationBars["Library"].children(matching: .button).element(boundBy: 1).tap()
+                
+        let fileNameTextField = app.windows.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .textField).element
+        fileNameTextField.tap()
+        fileNameTextField.typeText("test0_file_name")
+        
+        let fileContentTextView = app.children(matching: .window).element(boundBy: 0).children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .other).element.children(matching: .textView).element
+        fileContentTextView.tap()
+        fileContentTextView.typeText("example")
+        
+        let createEditNavigationBar = app.navigationBars["Create / Edit"]
+        createEditNavigationBar.buttons["Save this file"].tap()
+        createEditNavigationBar.buttons["Library"].tap()
+        
+        app/*@START_MENU_TOKEN@*/.collectionViews/*[[".scrollViews.collectionViews",".collectionViews"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.cells["test0_file_name"].children(matching: .other).element.children(matching: .other).element.tap()
+        app.navigationBars["test0_file_name"].buttons["Open this file for editing"].tap()
+        fileContentTextView.tap()
+        fileContentTextView.typeText("content ")
+        
+        createEditNavigationBar.buttons["Save this file"].tap()
+        createEditNavigationBar.buttons["test0_file_name"].tap()
+        
+        XCTAssertTrue(app.collectionViews.staticTexts["content"].exists)
+    }
 
     func testThereAreNoWordsConnectedToDeletedFiles() throws {
         
