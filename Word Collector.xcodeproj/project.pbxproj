@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		47C2EB3CF2A13C2235767F99 /* Pods_Word_Collector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B4E8B8837A71A837EB183B5 /* Pods_Word_Collector.framework */; };
 		6F012D8E28B676AC00D1FC5B /* CreateOrEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F012D8D28B676AC00D1FC5B /* CreateOrEditViewController.swift */; };
+		6F24D42528CE4CBF00EA3A9B /* Vobulary_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F24D42428CE4CBF00EA3A9B /* Vobulary_Tests.swift */; };
 		6F294F3928BBDFFA002A0F70 /* DictionaryTerm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F294F3828BBDFFA002A0F70 /* DictionaryTerm.swift */; };
 		6F294F3B28BBE30B002A0F70 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F294F3A28BBE30B002A0F70 /* String+Extension.swift */; };
 		6F48596828BBA6DC00B1FA71 /* Method.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F48596728BBA6DC00B1FA71 /* Method.swift */; };
@@ -57,6 +58,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6F24D41F28CE4C5B00EA3A9B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6FE145FB28B52ABC005B112F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6FE1460228B52ABC005B112F;
+			remoteInfo = "Word Collector";
+		};
 		6F7FCCF128C5128800620851 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6FE145FB28B52ABC005B112F /* Project object */;
@@ -70,6 +78,8 @@
 		0B4E8B8837A71A837EB183B5 /* Pods_Word_Collector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Word_Collector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FF48AD95C42AAC117545CA2 /* Pods-Word Collector.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Word Collector.release.xcconfig"; path = "Target Support Files/Pods-Word Collector/Pods-Word Collector.release.xcconfig"; sourceTree = "<group>"; };
 		6F012D8D28B676AC00D1FC5B /* CreateOrEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrEditViewController.swift; sourceTree = "<group>"; };
+		6F24D41B28CE4C5B00EA3A9B /* Word Collector Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Word Collector Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F24D42428CE4CBF00EA3A9B /* Vobulary_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vobulary_Tests.swift; sourceTree = "<group>"; };
 		6F294F3828BBDFFA002A0F70 /* DictionaryTerm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryTerm.swift; sourceTree = "<group>"; };
 		6F294F3A28BBE30B002A0F70 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		6F48596728BBA6DC00B1FA71 /* Method.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Method.swift; sourceTree = "<group>"; };
@@ -122,6 +132,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		6F24D41828CE4C5B00EA3A9B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6F7FCCE828C5128800620851 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -155,6 +172,14 @@
 				0B4E8B8837A71A837EB183B5 /* Pods_Word_Collector.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6F24D41C28CE4C5B00EA3A9B /* Word Collector Tests */ = {
+			isa = PBXGroup;
+			children = (
+				6F24D42428CE4CBF00EA3A9B /* Vobulary_Tests.swift */,
+			);
+			path = "Word Collector Tests";
 			sourceTree = "<group>";
 		};
 		6F672BFE28C4EC8000B085C3 /* WordCollectionView */ = {
@@ -223,6 +248,7 @@
 			children = (
 				6FE1460528B52ABC005B112F /* Word Collector */,
 				6F7FCCEC28C5128800620851 /* Word CollectorUITests */,
+				6F24D41C28CE4C5B00EA3A9B /* Word Collector Tests */,
 				6FE1460428B52ABC005B112F /* Products */,
 				53E00878EC330AC5F0B5BE33 /* Pods */,
 				5981043A3CB48DB3BDDC6885 /* Frameworks */,
@@ -234,6 +260,7 @@
 			children = (
 				6FE1460328B52ABC005B112F /* Word Collector.app */,
 				6F7FCCEB28C5128800620851 /* Word CollectorUITests.xctest */,
+				6F24D41B28CE4C5B00EA3A9B /* Word Collector Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -329,6 +356,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		6F24D41A28CE4C5B00EA3A9B /* Word Collector Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6F24D42328CE4C5B00EA3A9B /* Build configuration list for PBXNativeTarget "Word Collector Tests" */;
+			buildPhases = (
+				6F24D41728CE4C5B00EA3A9B /* Sources */,
+				6F24D41828CE4C5B00EA3A9B /* Frameworks */,
+				6F24D41928CE4C5B00EA3A9B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6F24D42028CE4C5B00EA3A9B /* PBXTargetDependency */,
+			);
+			name = "Word Collector Tests";
+			productName = "Word Collector Tests";
+			productReference = 6F24D41B28CE4C5B00EA3A9B /* Word Collector Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		6F7FCCEA28C5128800620851 /* Word CollectorUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6F7FCCF528C5128800620851 /* Build configuration list for PBXNativeTarget "Word CollectorUITests" */;
@@ -376,6 +421,10 @@
 				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
+					6F24D41A28CE4C5B00EA3A9B = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = 6FE1460228B52ABC005B112F;
+					};
 					6F7FCCEA28C5128800620851 = {
 						CreatedOnToolsVersion = 13.4.1;
 						TestTargetID = 6FE1460228B52ABC005B112F;
@@ -400,11 +449,19 @@
 			targets = (
 				6FE1460228B52ABC005B112F /* Word Collector */,
 				6F7FCCEA28C5128800620851 /* Word CollectorUITests */,
+				6F24D41A28CE4C5B00EA3A9B /* Word Collector Tests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		6F24D41928CE4C5B00EA3A9B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6F7FCCE928C5128800620851 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -470,6 +527,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6F24D41728CE4C5B00EA3A9B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6F24D42528CE4CBF00EA3A9B /* Vobulary_Tests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		6F7FCCE728C5128800620851 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -527,6 +592,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6F24D42028CE4C5B00EA3A9B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6FE1460228B52ABC005B112F /* Word Collector */;
+			targetProxy = 6F24D41F28CE4C5B00EA3A9B /* PBXContainerItemProxy */;
+		};
 		6F7FCCF228C5128800620851 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 6FE1460228B52ABC005B112F /* Word Collector */;
@@ -554,6 +624,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		6F24D42128CE4C5B00EA3A9B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H8YTB7PJP9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "pl.biuro-rachunkowe-cyferka.Word-Collector-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Word Collector.app/Word Collector";
+			};
+			name = Debug;
+		};
+		6F24D42228CE4C5B00EA3A9B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = H8YTB7PJP9;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "pl.biuro-rachunkowe-cyferka.Word-Collector-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Word Collector.app/Word Collector";
+			};
+			name = Release;
+		};
 		6F7FCCF328C5128800620851 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -763,6 +869,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		6F24D42328CE4C5B00EA3A9B /* Build configuration list for PBXNativeTarget "Word Collector Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6F24D42128CE4C5B00EA3A9B /* Debug */,
+				6F24D42228CE4C5B00EA3A9B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		6F7FCCF528C5128800620851 /* Build configuration list for PBXNativeTarget "Word CollectorUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
