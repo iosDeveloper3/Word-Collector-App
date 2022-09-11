@@ -135,6 +135,10 @@ class FileViewController: UIViewController {
     func hideTermView() {
         termView.isHidden = true
         termViewHeight = termViewHeight.setMultiplier(multiplier: 0.01)
+        if let location = wordLocation, let cell = wordCollectionView.cellForItem(at: location) as? WordCollectionViewCell {
+            cell.wordLabel.removeUnderline()
+            wordLocation = nil
+        }
     }
     
     func showTermView() {
@@ -144,7 +148,6 @@ class FileViewController: UIViewController {
     }
     
     func openTermInspector(selectedWord: String?, indexPath: IndexPath?) {
-        
         wordLocation = indexPath
         addToVocabularyButton.isSelected = vocabulary.contains(word: SavedWord(word: selectedWord, fileName: fileName, paragraphNumber: indexPath?.section, wordNumber: indexPath?.row))
         
