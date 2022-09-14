@@ -10,9 +10,9 @@ import UIKit
 class VocabularyViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    
+
     let vocabulary = Vocabulary.shared
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.register(UINib(nibName: VocabularyTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: VocabularyTableViewCell.identifier)
@@ -25,11 +25,11 @@ class VocabularyViewController: UIViewController {
 }
 
 extension VocabularyViewController: UITableViewDelegate, UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return vocabulary.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: VocabularyTableViewCell.identifier, for: indexPath) as? VocabularyTableViewCell else {
             fatalError()
@@ -37,7 +37,7 @@ extension VocabularyViewController: UITableViewDelegate, UITableViewDataSource {
         cell.setup(savedWord: vocabulary.savedWord(at: indexPath.row))
         return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = FileViewController.instantiate() {
             vc.fileName = vocabulary.fileName(at: indexPath.row)

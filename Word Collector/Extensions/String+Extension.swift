@@ -8,10 +8,11 @@
 import Foundation
 
 extension String {
+
     var presence: String? {
         return isEmpty ? nil : self
     }
-    
+
     func ifNotEmptyWith(prefix: String) -> String {
         return isEmpty ? self : prefix + self
     }

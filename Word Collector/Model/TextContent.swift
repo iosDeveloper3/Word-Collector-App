@@ -8,10 +8,10 @@
 import Foundation
 
 struct TextContent {
-    
+
     let text: String
     let paragraphs: [[String]]
-    
+
     init(_ content: String) {
         text = content
         let lines = text.components(separatedBy: CharacterSet(charactersIn: "\n"))

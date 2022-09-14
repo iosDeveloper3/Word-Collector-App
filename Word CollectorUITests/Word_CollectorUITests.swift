@@ -7,6 +7,8 @@
 
 import XCTest
 
+// swiftlint:disable all
+
 class Word_CollectorUITests: XCTestCase {
 
     override func setUpWithError() throws {

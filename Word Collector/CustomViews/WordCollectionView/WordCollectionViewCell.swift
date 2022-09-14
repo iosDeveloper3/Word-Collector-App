@@ -9,7 +9,7 @@ import UIKit
 
 class WordCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var wordLabel: UILabel!
-    
+
     func setup(word: String?) {
         wordLabel.text = word
     }

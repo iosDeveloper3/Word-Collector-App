@@ -8,7 +8,7 @@
 import UIKit
 
 class FileViewController: UIViewController {
-    
+
     @IBOutlet weak var wordCollectionView: UICollectionView!
     @IBOutlet weak var textFormatView: UIView!
     @IBOutlet weak var fontSizeSlider: UISlider!
@@ -23,7 +23,7 @@ class FileViewController: UIViewController {
     @IBOutlet weak var termPronunciationButton: UIButton!
     @IBOutlet weak var definitionsTableView: UITableView!
     @IBOutlet weak var addToVocabularyButton: UIButton!
-    
+
     var fileName: String?
     var content: TextContent?
     var textFormat = TextFormat()
@@ -32,7 +32,7 @@ class FileViewController: UIViewController {
     var wordLocation: IndexPath?
     var term: DictionaryTerm?
     let vocabulary = Vocabulary.shared
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setBorderColorForMarkedButtons()
@@ -40,10 +40,10 @@ class FileViewController: UIViewController {
         definitionsTableView.register(UINib(nibName: DefinitionTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: DefinitionTableViewCell.identifier)
         hideTermView()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         do {
             content = TextContent(try StorageManager.readFile(fileName: fileName))
             title = fileName
@@ -62,23 +62,23 @@ class FileViewController: UIViewController {
             openTermInspector(selectedWord: word, indexPath: location)
         }
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? CreateOrEditViewController {
             vc.fileName = title
             vc.fileContent = content?.text
         }
     }
-    
+
     // based on https://developer.apple.com/videos/play/wwdc2019/214/
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
-        
+
         if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
             setBorderColorForMarkedButtons()
         }
     }
-    
+
     func setTextFormat() {
         fontSizeSlider.value = textFormat.fontSize
         fontWeightSlider.value = textFormat.fontWeight
@@ -95,7 +95,7 @@ class FileViewController: UIViewController {
         view.backgroundColor = textFormat.colorScheme.backgroundColor
         wordCollectionView.reloadData()
     }
-    
+
     func markSchemeColorButton(_ button: UIButton) {
         defaultSchemeButton.layer.borderWidth = 0
         defaultSchemeButton.accessibilityTraits.remove(.selected)
@@ -108,14 +108,14 @@ class FileViewController: UIViewController {
         button.layer.borderWidth = 2
         button.accessibilityTraits.insert(.selected)
     }
-    
+
     func setBorderColorForMarkedButtons() {
         defaultSchemeButton.layer.borderColor = UIColor.label.cgColor
         blackOnWhiteSchemeButton.layer.borderColor = UIColor.label.cgColor
         whiteOnBlackSchemeButton.layer.borderColor = UIColor.label.cgColor
         readingSchemeButton.layer.borderColor = UIColor.label.cgColor
     }
-    
+
     func setNewDictionaryTerm(newTerm: DictionaryTerm?, newWord: String?) {
         term = newTerm
         word = newWord
@@ -131,7 +131,7 @@ class FileViewController: UIViewController {
         definitionsTableView.reloadData()
         showTermView()
     }
-    
+
     func hideTermView() {
         termView.isHidden = true
         termViewHeight = termViewHeight.setMultiplier(multiplier: 0.01)
@@ -140,19 +140,19 @@ class FileViewController: UIViewController {
             wordLocation = nil
         }
     }
-    
+
     func showTermView() {
         UIAccessibility.post(notification: .layoutChanged, argument: termView)
         termViewHeight = termViewHeight.setMultiplier(multiplier: 0.6)
         termView.isHidden = false
     }
-    
+
     func openTermInspector(selectedWord: String?, indexPath: IndexPath?) {
         wordLocation = indexPath
         addToVocabularyButton.isSelected = vocabulary.contains(word: SavedWord(word: selectedWord, fileName: fileName, paragraphNumber: indexPath?.section, wordNumber: indexPath?.row))
-        
+
         guard selectedWord != word else { return }
-        
+
         word = selectedWord
         dictionaryTermLabel.text = selectedWord
         NetworkManager.shared.fetchEntries(for: selectedWord ?? "") { [weak self] (result) in
@@ -171,21 +171,21 @@ class FileViewController: UIViewController {
         textFormatView.isHidden = false
         UIAccessibility.post(notification: .layoutChanged, argument: textFormatView)
     }
-    
+
     @IBAction func closeTextFormatClicked(_ sender: Any) {
         textFormatView.isHidden = true
     }
-    
+
     @IBAction func fontSizeChanged(_ sender: UISlider) {
         textFormat.fontSize = sender.value
         wordCollectionView.reloadData()
     }
-    
+
     @IBAction func fontWeightChanged(_ sender: UISlider) {
         textFormat.fontWeight = sender.value
         wordCollectionView.reloadData()
     }
-    
+
     @IBAction func shemeButtonClicked(_ sender: UIButton) {
         var colorScheme = ColorScheme.defaultScheme
         switch sender {
@@ -203,47 +203,46 @@ class FileViewController: UIViewController {
         wordCollectionView.reloadData()
         markSchemeColorButton(sender)
     }
-    
+
     @IBAction func setToDefaultButtonClicked(_ sender: Any) {
         textFormat.setToDefault()
         setTextFormat()
     }
-    
+
     @IBAction func pronunciationButtonTapped(_ sender: Any) {
         term?.playPronunciation()
     }
-    
+
     @IBAction func saveWordButtonTapped(_ sender: Any) {
         if let word = word, let fileName = fileName, let locationInFile = wordLocation {
             if addToVocabularyButton.isSelected {
                 vocabulary.remove(word: SavedWord(word: word, fileName: fileName, paragraphNumber: locationInFile.section, wordNumber: locationInFile.row))
-            }
-            else {
+            } else {
                 vocabulary.add(word: SavedWord(word: word, fileName: fileName, paragraphNumber: locationInFile.section, wordNumber: locationInFile.row))
             }
             addToVocabularyButton.isSelected = !addToVocabularyButton.isSelected
         }
     }
-    
+
     @IBAction func closeTermInspectorButtonTapped(_ sender: Any) {
         hideTermView()
     }
 }
 
 extension FileViewController: UITableViewDelegate, UITableViewDataSource {
-    
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return term?.partsOfSpeach.count ?? 0
     }
-    
+
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return term?.partsOfSpeach[section]
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return term?.information[section].count ?? 0
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: DefinitionTableViewCell.identifier) as? DefinitionTableViewCell else {
             fatalError()
@@ -254,15 +253,15 @@ extension FileViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension FileViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
+
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return content?.paragraphs.count ?? 0
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return content?.paragraphs[section].count ?? 0
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WordCollectionViewCell.identifier, for: indexPath) as? WordCollectionViewCell else {
             fatalError()
@@ -275,7 +274,7 @@ extension FileViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
         return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let location = wordLocation, let cell = collectionView.cellForItem(at: location) as? WordCollectionViewCell {
             cell.wordLabel.removeUnderline()

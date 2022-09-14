@@ -9,13 +9,13 @@
 
 import UIKit
 
-protocol CustomNavigationViewControllerDelegate {
+protocol CustomNavigationViewControllerDelegate: AnyObject {
     func shouldPop() -> Bool
 }
 
 class CustomNavigationViewController: UINavigationController, UINavigationBarDelegate {
 
-    var backDelegate: CustomNavigationViewControllerDelegate?
+    weak var backDelegate: CustomNavigationViewControllerDelegate?
 
     func navigationBar(_ navigationBar: UINavigationBar, shouldPop item: UINavigationItem) -> Bool {
         return backDelegate?.shouldPop() ?? true

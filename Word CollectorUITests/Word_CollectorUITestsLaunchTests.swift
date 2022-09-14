@@ -7,6 +7,8 @@
 
 import XCTest
 
+// swiftlint:disable all
+
 class Word_CollectorUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {

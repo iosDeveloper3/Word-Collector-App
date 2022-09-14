@@ -8,8 +8,8 @@
 import Foundation
 
 protocol Route {
-    
+
     var baseUrl: String { get }
-    
+
     var endpoint: String { get }
 }

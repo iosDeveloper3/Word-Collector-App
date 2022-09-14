@@ -11,7 +11,7 @@ struct TextFormat {
     let defaultFontSize: Float = 14
     let defaultFontWeight: Float = 3
     let defaultColorScheme: ColorScheme = .defaultScheme
-    
+
     var fontSize: Float {
         didSet {
             UserDefaults.standard.fontSize = fontSize
@@ -27,13 +27,13 @@ struct TextFormat {
             UserDefaults.standard.colorScheme = colorScheme.rawValue
         }
     }
-    
+
     init() {
         fontSize = UserDefaults.standard.fontSize ?? defaultFontSize
         fontWeight = UserDefaults.standard.fontWeight ?? defaultFontWeight
         colorScheme = ColorScheme(rawValue: UserDefaults.standard.colorScheme) ?? defaultColorScheme
     }
-    
+
     mutating func setToDefault() {
         fontSize = defaultFontSize
         fontWeight = defaultFontWeight

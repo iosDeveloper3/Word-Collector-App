@@ -9,12 +9,12 @@ import Foundation
 import UIKit
 
 enum ColorScheme: Int {
-    
+
     case defaultScheme = 0
     case blackOnWhite = 1
     case whiteOnBlack = 2
     case bestForReading = 3 // according to https://www.poradopedia.pl/edukacja/najlepszy-schemat-kolorow-do-czytania,1101.html
-    
+
     var fontColor: UIColor? {
         switch self {
         case .defaultScheme:
@@ -27,7 +27,7 @@ enum ColorScheme: Int {
             return .CustomColor.bestReadingForecolor
         }
     }
-    
+
     var backgroundColor: UIColor? {
         switch self {
         case .defaultScheme:

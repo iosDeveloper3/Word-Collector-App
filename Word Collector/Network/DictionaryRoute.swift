@@ -8,13 +8,13 @@
 import Foundation
 
 enum DictionaryRoute: Route {
-    
+
     var baseUrl: String {
         return "https://api.dictionaryapi.dev/api/v2/"
     }
-    
+
     case entries(String)
-    
+
     var endpoint: String {
         switch self {
         case .entries(let word):

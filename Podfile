@@ -6,6 +6,7 @@ target 'Word Collector' do
   use_frameworks!
 
   # Pods for Word Collector
+  pod 'SwiftLint'
   pod 'IQKeyboardManagerSwift'
   pod 'ProgressHUD'
 end

@@ -8,12 +8,12 @@
 import UIKit
 
 class DefinitionTableViewCell: UITableViewCell {
-    
+
     @IBOutlet weak var definitionLabel: UILabel!
     @IBOutlet weak var exampleLabel: UILabel!
     @IBOutlet weak var synonymsLabel: UILabel!
     @IBOutlet weak var antonymsLabel: UILabel!
-    
+
     func setup(definition: Definition) {
         definitionLabel.text = definition.definition
         definitionLabel.isAccessibilityElement = !(definitionLabel.text?.isEmpty ?? true)

@@ -10,12 +10,12 @@ import UIKit
 extension NSLayoutConstraint {
 
     // based on https://stackoverflow.com/a/33003217
-    func setMultiplier(multiplier:CGFloat) -> NSLayoutConstraint {
+    func setMultiplier(multiplier: CGFloat) -> NSLayoutConstraint {
 
         NSLayoutConstraint.deactivate([self])
 
         let newConstraint = NSLayoutConstraint(
-            item: firstItem,
+            item: firstItem as Any,
             attribute: firstAttribute,
             relatedBy: relation,
             toItem: secondItem,
