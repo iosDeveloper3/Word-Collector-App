@@ -10,13 +10,7 @@ import UIKit
 class FileViewController: UIViewController {
 
     @IBOutlet weak var wordCollectionView: UICollectionView!
-    @IBOutlet weak var textFormatView: UIView!
-    @IBOutlet weak var fontSizeSlider: UISlider!
-    @IBOutlet weak var fontWeightSlider: UISlider!
-    @IBOutlet weak var defaultSchemeButton: UIButton!
-    @IBOutlet weak var blackOnWhiteSchemeButton: UIButton!
-    @IBOutlet weak var whiteOnBlackSchemeButton: UIButton!
-    @IBOutlet weak var readingSchemeButton: UIButton!
+    @IBOutlet weak var textFormatView: TextFormatView!
     @IBOutlet weak var termViewHeight: NSLayoutConstraint!
     @IBOutlet weak var termView: UIView!
     @IBOutlet weak var dictionaryTermLabel: UILabel!
@@ -35,8 +29,7 @@ class FileViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setBorderColorForMarkedButtons()
-        setTextFormat()
+        textFormatView.delegate = self
         definitionsTableView.register(UINib(nibName: DefinitionTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: DefinitionTableViewCell.identifier)
         hideTermView()
     }
@@ -68,52 +61,6 @@ class FileViewController: UIViewController {
             vc.fileName = title
             vc.fileContent = content?.text
         }
-    }
-
-    // based on https://developer.apple.com/videos/play/wwdc2019/214/
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-
-        if traitCollection.hasDifferentColorAppearance(comparedTo: previousTraitCollection) {
-            setBorderColorForMarkedButtons()
-        }
-    }
-
-    func setTextFormat() {
-        fontSizeSlider.value = textFormat.fontSize
-        fontWeightSlider.value = textFormat.fontWeight
-        switch textFormat.colorScheme {
-        case .blackOnWhite:
-            markSchemeColorButton(blackOnWhiteSchemeButton)
-        case .whiteOnBlack:
-            markSchemeColorButton(whiteOnBlackSchemeButton)
-        case .bestForReading:
-            markSchemeColorButton(readingSchemeButton)
-        default:
-            markSchemeColorButton(defaultSchemeButton)
-        }
-        view.backgroundColor = textFormat.colorScheme.backgroundColor
-        wordCollectionView.reloadData()
-    }
-
-    func markSchemeColorButton(_ button: UIButton) {
-        defaultSchemeButton.layer.borderWidth = 0
-        defaultSchemeButton.accessibilityTraits.remove(.selected)
-        blackOnWhiteSchemeButton.layer.borderWidth = 0
-        blackOnWhiteSchemeButton.accessibilityTraits.remove(.selected)
-        whiteOnBlackSchemeButton.layer.borderWidth = 0
-        whiteOnBlackSchemeButton.accessibilityTraits.remove(.selected)
-        readingSchemeButton.layer.borderWidth = 0
-        readingSchemeButton.accessibilityTraits.remove(.selected)
-        button.layer.borderWidth = 2
-        button.accessibilityTraits.insert(.selected)
-    }
-
-    func setBorderColorForMarkedButtons() {
-        defaultSchemeButton.layer.borderColor = UIColor.label.cgColor
-        blackOnWhiteSchemeButton.layer.borderColor = UIColor.label.cgColor
-        whiteOnBlackSchemeButton.layer.borderColor = UIColor.label.cgColor
-        readingSchemeButton.layer.borderColor = UIColor.label.cgColor
     }
 
     func setNewDictionaryTerm(newTerm: DictionaryTerm?, newWord: String?) {
@@ -172,43 +119,6 @@ class FileViewController: UIViewController {
         UIAccessibility.post(notification: .layoutChanged, argument: textFormatView)
     }
 
-    @IBAction func closeTextFormatClicked(_ sender: Any) {
-        textFormatView.isHidden = true
-    }
-
-    @IBAction func fontSizeChanged(_ sender: UISlider) {
-        textFormat.fontSize = sender.value
-        wordCollectionView.reloadData()
-    }
-
-    @IBAction func fontWeightChanged(_ sender: UISlider) {
-        textFormat.fontWeight = sender.value
-        wordCollectionView.reloadData()
-    }
-
-    @IBAction func shemeButtonClicked(_ sender: UIButton) {
-        var colorScheme = ColorScheme.defaultScheme
-        switch sender {
-        case blackOnWhiteSchemeButton:
-            colorScheme = .blackOnWhite
-        case whiteOnBlackSchemeButton:
-            colorScheme = .whiteOnBlack
-        case readingSchemeButton:
-            colorScheme = .bestForReading
-        default:
-            colorScheme = .defaultScheme
-        }
-        view.backgroundColor = colorScheme.backgroundColor
-        textFormat.colorScheme = colorScheme
-        wordCollectionView.reloadData()
-        markSchemeColorButton(sender)
-    }
-
-    @IBAction func setToDefaultButtonClicked(_ sender: Any) {
-        textFormat.setToDefault()
-        setTextFormat()
-    }
-
     @IBAction func pronunciationButtonTapped(_ sender: Any) {
         term?.playPronunciation()
     }
@@ -226,6 +136,15 @@ class FileViewController: UIViewController {
 
     @IBAction func closeTermInspectorButtonTapped(_ sender: Any) {
         hideTermView()
+    }
+}
+
+extension FileViewController: TextFormatViewDelegate {
+
+    func updateFormatText(_ textFormatView: TextFormatView, scheme: TextFormat) {
+        textFormat = scheme
+        view.backgroundColor = scheme.colorScheme.backgroundColor
+        wordCollectionView.reloadData()
     }
 }
 

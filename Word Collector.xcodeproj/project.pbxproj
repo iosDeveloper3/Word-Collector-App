@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		47C2EB3CF2A13C2235767F99 /* Pods_Word_Collector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B4E8B8837A71A837EB183B5 /* Pods_Word_Collector.framework */; };
 		6F012D8E28B676AC00D1FC5B /* CreateOrEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F012D8D28B676AC00D1FC5B /* CreateOrEditViewController.swift */; };
+		6F109EB728D62B60001D5DD4 /* TextFormatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6F109EB628D62B60001D5DD4 /* TextFormatView.xib */; };
+		6F109EB928D62B70001D5DD4 /* TextFormatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F109EB828D62B70001D5DD4 /* TextFormatView.swift */; };
 		6F24D42528CE4CBF00EA3A9B /* Vobulary_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F24D42428CE4CBF00EA3A9B /* Vobulary_Tests.swift */; };
 		6F294F3928BBDFFA002A0F70 /* DictionaryTerm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F294F3828BBDFFA002A0F70 /* DictionaryTerm.swift */; };
 		6F294F3B28BBE30B002A0F70 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F294F3A28BBE30B002A0F70 /* String+Extension.swift */; };
@@ -78,6 +80,8 @@
 		0B4E8B8837A71A837EB183B5 /* Pods_Word_Collector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Word_Collector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FF48AD95C42AAC117545CA2 /* Pods-Word Collector.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Word Collector.release.xcconfig"; path = "Target Support Files/Pods-Word Collector/Pods-Word Collector.release.xcconfig"; sourceTree = "<group>"; };
 		6F012D8D28B676AC00D1FC5B /* CreateOrEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateOrEditViewController.swift; sourceTree = "<group>"; };
+		6F109EB628D62B60001D5DD4 /* TextFormatView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFormatView.xib; sourceTree = "<group>"; };
+		6F109EB828D62B70001D5DD4 /* TextFormatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFormatView.swift; sourceTree = "<group>"; };
 		6F24D41B28CE4C5B00EA3A9B /* Word Collector Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Word Collector Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F24D42428CE4CBF00EA3A9B /* Vobulary_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vobulary_Tests.swift; sourceTree = "<group>"; };
 		6F294F3828BBDFFA002A0F70 /* DictionaryTerm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryTerm.swift; sourceTree = "<group>"; };
@@ -172,6 +176,15 @@
 				0B4E8B8837A71A837EB183B5 /* Pods_Word_Collector.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6F109EB528D62B47001D5DD4 /* TextFormatView */ = {
+			isa = PBXGroup;
+			children = (
+				6F109EB628D62B60001D5DD4 /* TextFormatView.xib */,
+				6F109EB828D62B70001D5DD4 /* TextFormatView.swift */,
+			);
+			path = TextFormatView;
 			sourceTree = "<group>";
 		};
 		6F24D41C28CE4C5B00EA3A9B /* Word Collector Tests */ = {
@@ -345,6 +358,7 @@
 		6FE1462128B53767005B112F /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				6F109EB528D62B47001D5DD4 /* TextFormatView */,
 				6F672BFE28C4EC8000B085C3 /* WordCollectionView */,
 				6F6F7A5F28BF79160039F1B9 /* VocabularyTableCell */,
 				6FDEFB1328BD010B008C8687 /* DefinitionTableCell */,
@@ -474,6 +488,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F109EB728D62B60001D5DD4 /* TextFormatView.xib in Resources */,
 				6FDEFB1728BD0139008C8687 /* DefinitionTableViewCell.xib in Resources */,
 				6F6F7A6528BF8BAC0039F1B9 /* VocabularyTableViewCell.xib in Resources */,
 				6FE1461328B52ABD005B112F /* LaunchScreen.storyboard in Resources */,
@@ -502,7 +517,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/SwiftLint/swiftlint\" --fix && \"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 		E814079A2B1B3839DE5DC691 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -578,6 +593,7 @@
 				6F7DB36928B79E350043FDC2 /* CustomNavigationViewController.swift in Sources */,
 				6F48597028BBAA4D00B1FA71 /* DictionaryRoute.swift in Sources */,
 				6F6F7A5A28BF6CE50039F1B9 /* SavedWord.swift in Sources */,
+				6F109EB928D62B70001D5DD4 /* TextFormatView.swift in Sources */,
 				6F672C0628C509C700B085C3 /* UILabel+Extension.swift in Sources */,
 				6FE1462B28B53EFB005B112F /* UIView+Extension.swift in Sources */,
 				6FE1460728B52ABC005B112F /* AppDelegate.swift in Sources */,
